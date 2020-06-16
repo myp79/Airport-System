@@ -1,12 +1,6 @@
 package Model;
 
 public abstract class Person {
-    public String id;
-    public String name;
-    public String lastname;
-    public String username;
-    public String password;
-    public String email;
 
     public abstract String getId();
 
