@@ -3,12 +3,15 @@ package Controller;
 import Model.Database;
 import View.LoginView;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 
 public class LoginController {
     private LoginView loginView;
 
     public LoginController() {
         loginView = new LoginView();
+        submitBtn();
+        signUp();
     }
 
     public void submitBtn() {
@@ -21,7 +24,7 @@ public class LoginController {
 
                 } else if (userRoll.equals("employee")) {
 
-                } else if (userRoll.equals("Person")) {
+                } else if (userRoll.equals("passenger")) {
 
                 }
             } else {
@@ -30,6 +33,13 @@ public class LoginController {
                 alert.setContentText("User doesn't exist. Check username and password.");
                 alert.show();
             }
+        });
+    }
+
+    public void signUp(){
+        loginView.getSignUp().setOnAction(actionEvent -> {
+            SignUpController signUpController=new SignUpController();
+            loginView.getScene().setRoot(signUpController.getSignUpView());
         });
     }
 
