@@ -34,7 +34,7 @@ public class LoginView extends BorderPane {
         HBox btnGroup = new HBox(submit, signUp);
 
         // All be one
-        VBox all=new VBox(information,btnGroup);
+        VBox all = new VBox(information, btnGroup);
 
         // Setting of Login View
         this.setCenter(all);

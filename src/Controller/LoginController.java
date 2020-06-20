@@ -36,9 +36,9 @@ public class LoginController {
         });
     }
 
-    public void signUp(){
+    public void signUp() {
         loginView.getSignUp().setOnAction(actionEvent -> {
-            SignUpController signUpController=new SignUpController();
+            SignUpController signUpController = new SignUpController();
             loginView.getScene().setRoot(signUpController.getSignUpView());
         });
     }

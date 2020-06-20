@@ -36,8 +36,8 @@ public class SignUpView extends BorderPane {
         submit.setText("Submit");
 
         // Make VBox for input
-        VBox information = new VBox(name, lastname,email);
-        VBox loginInformation=new VBox(idCard,username,password);
+        VBox information = new VBox(name, lastname, email);
+        VBox loginInformation = new VBox(idCard, username, password);
         information.setAlignment(Pos.CENTER);
         loginInformation.setAlignment(Pos.CENTER);
 
@@ -45,7 +45,7 @@ public class SignUpView extends BorderPane {
         HBox btnGroup = new HBox(submit);
 
         // All be one
-        VBox all=new VBox(information,loginInformation,btnGroup);
+        VBox all = new VBox(information, loginInformation, btnGroup);
 
         // Setting of Login View
         this.setCenter(all);
