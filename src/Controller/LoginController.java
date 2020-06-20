@@ -8,7 +8,10 @@ public class LoginController {
     public LoginController() {
         loginView = new LoginView();
     }
-
+    public void submitBtn(){
+        loginView.getSubmit().setOnAction(actionEvent -> {
+        });
+    }
     public LoginView getLoginView() {
         return loginView;
     }
