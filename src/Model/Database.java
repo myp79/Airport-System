@@ -25,4 +25,14 @@ public class Database {
         }
         return null;
     }
+    public static void add(String name,String lastname,String email, String idcard , String username,String password,String roll){
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("INSERT INTO person (name, lastname, email, idcard, username, password, roll) VALUES('%s','%s','%s','%s','%s','%s','%s')",name,lastname,email,idcard,username,password,roll));
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
