@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         LoginController loginController = new LoginController();
-        Scene scene = loginController.getLoginView().getScene();
+        Scene scene = new Scene(loginController.getLoginView());
         stage.setScene(scene);
         stage.show();
     }

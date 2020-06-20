@@ -5,8 +5,8 @@ import View.LoginView;
 public class LoginController {
     private LoginView loginView;
 
-    public LoginController(){
-        loginView=new LoginView();
+    public LoginController() {
+        loginView = new LoginView();
     }
 
     public LoginView getLoginView() {
