@@ -1,3 +1,5 @@
+package Model;
+
 import java.sql.*;
 
 public class Database {
@@ -7,11 +9,11 @@ public class Database {
     private static String adminUser = "root";
     private static String adminPassword = "19376428";
 
-    public static String check(String username){
+    public static String check(String username, String password){
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            ResultSet resultSet=statement.executeQuery("SELECT * FROM person");
+            ResultSet resultSet=statement.executeQuery("SELECT * FROM person WHERE 'password'="+password);
             while (resultSet.next()){
                 if (resultSet.getString("username").equals(username)){
                     return resultSet.getString("roll");
