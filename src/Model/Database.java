@@ -13,7 +13,7 @@ public class Database {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM person WHERE 'password'=" + password);
+            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM person WHERE password = '%s'",password));
             while (resultSet.next()) {
                 if (resultSet.getString("username").equals(username)) {
                     return resultSet.getString("roll");
