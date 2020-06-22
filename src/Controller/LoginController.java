@@ -18,10 +18,9 @@ public class LoginController {
         loginView.getSubmit().setOnAction(actionEvent -> {
             String userRoll = Database.check(loginView.getUsername().getText(), loginView.getPassword().getText());
             if (userRoll != null) {
-                if (userRoll.equals("admin")) {
-
-                } else if (userRoll.equals("manager")) {
-
+                if (userRoll.equals("admin") || userRoll.equals("manager")) {
+                    ManagerController managerController = new ManagerController(userRoll);
+                    loginView.getScene().setRoot(managerController.getManagerView());
                 } else if (userRoll.equals("employee")) {
 
                 } else if (userRoll.equals("passenger")) {
