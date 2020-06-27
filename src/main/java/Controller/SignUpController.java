@@ -5,7 +5,7 @@ import View.SignUpView;
 import javafx.scene.control.Alert;
 
 public class SignUpController {
-    SignUpView signUpView;
+    private SignUpView signUpView;
 
     public SignUpController() {
         signUpView = new SignUpView();

@@ -3,7 +3,6 @@ package Controller;
 import Model.Database;
 import View.LoginView;
 import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 
 public class LoginController {
     private LoginView loginView;
@@ -15,11 +14,14 @@ public class LoginController {
     }
 
     public void submitBtn() {
+        String username=loginView.getUsername().getText();
         loginView.getSubmit().setOnAction(actionEvent -> {
             String userRoll = Database.check(loginView.getUsername().getText(), loginView.getPassword().getText());
             if (userRoll != null) {
                 if (userRoll.equals("admin") || userRoll.equals("manager")) {
-                    ManagerController managerController = new ManagerController(userRoll);
+                    ManagerController managerController = new ManagerController();
+                    managerController.setUsername(username);
+                    managerController.setRoll(userRoll);
                     loginView.getScene().setRoot(managerController.getManagerView());
                 } else if (userRoll.equals("employee")) {
 
@@ -41,6 +43,7 @@ public class LoginController {
             loginView.getScene().setRoot(signUpController.getSignUpView());
         });
     }
+
 
     public LoginView getLoginView() {
         return loginView;

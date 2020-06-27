@@ -13,7 +13,7 @@ public class Database {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM person WHERE password = '%s'",password));
+            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM person WHERE password = '%s'", password));
             while (resultSet.next()) {
                 if (resultSet.getString("username").equals(username)) {
                     return resultSet.getString("roll");
@@ -35,5 +35,17 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void update(String username,String password){
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("UPDATE person SET password = '%s' WHERE username='%s'",password,username));
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
