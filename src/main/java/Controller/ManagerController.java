@@ -7,9 +7,8 @@ import javafx.stage.Stage;
 public class ManagerController {
     private ManagerView managerView;
     private String username;
-    private String roll;
 
-    public ManagerController() {
+    public ManagerController(String roll) {
         managerView = new ManagerView();
         if (roll.equals("admin")) {
             managerView.getBtnGroup().getChildren().addAll(managerView.getManger());
@@ -30,10 +29,6 @@ public class ManagerController {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public void setRoll(String roll) {
-        this.roll = roll;
     }
 
     public ManagerView getManagerView() {

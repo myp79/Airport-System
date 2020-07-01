@@ -21,9 +21,8 @@ public class LoginController {
                 switch (userRoll) {
                     case "admin":
                     case "manager":
-                        ManagerController managerController = new ManagerController();
+                        ManagerController managerController = new ManagerController(userRoll);
                         managerController.setUsername(username);
-                        managerController.setRoll(userRoll);
                         loginView.getScene().setRoot(managerController.getManagerView());
                         break;
                     case "employee":
