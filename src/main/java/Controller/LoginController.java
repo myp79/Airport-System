@@ -14,7 +14,7 @@ public class LoginController {
     }
 
     public void submitBtn() {
-        String username=loginView.getUsername().getText();
+        String username = loginView.getUsername().getText();
         loginView.getSubmit().setOnAction(actionEvent -> {
             String userRoll = Database.check(loginView.getUsername().getText(), loginView.getPassword().getText());
             if (userRoll != null) {
@@ -24,6 +24,9 @@ public class LoginController {
                     managerController.setRoll(userRoll);
                     loginView.getScene().setRoot(managerController.getManagerView());
                 } else if (userRoll.equals("employee")) {
+                    EmployeeController employeeController = new EmployeeController();
+                    employeeController.setUsername(username);
+                    loginView.getScene().setRoot(employeeController.getEmployeeView());
 
                 } else if (userRoll.equals("passenger")) {
 

@@ -14,7 +14,7 @@ public class ChangeProfileController {
 
     public void submitBtn() {
         changeProfileView.getSubmit().setOnAction(actionEvent -> {
-            Database.update(username,changeProfileView.getPassword().getText());
+            Database.update(username, changeProfileView.getPassword().getText());
         });
 
     }
