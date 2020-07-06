@@ -26,22 +26,22 @@ public class Database {
         return null;
     }
 
-    public static void add(String name, String lastname, String email, String address,String idcard, String username, String password, String roll) {
+    public static void add(String name, String lastname, String email, String address, String idcard, int money, String username, String password, String roll) {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            statement.executeUpdate(String.format("(name, lastname, email, idcard, address, password, roll, username) VALUES('%s','%s','%s','%s','%s','%s','%s','%s')", name, lastname, email,address, idcard, username, password, roll));
+            statement.executeUpdate(String.format("INSERT INTO person (name, lastname, email, idcard, address, money, username, password, roll) VALUES('%s','%s','%s','%s','%d','%s','%s','%s','%s')", name, lastname, email, address, money, idcard, username, password, roll));
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public static void update(String username,String password){
+    public static void update(String username, String password) {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            statement.executeUpdate(String.format("UPDATE person SET password = '%s' WHERE username='%s'",password,username));
+            statement.executeUpdate(String.format("UPDATE person SET password = '%s' WHERE username='%s'", password, username));
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();

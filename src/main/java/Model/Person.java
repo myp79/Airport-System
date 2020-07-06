@@ -8,6 +8,7 @@ public abstract class Person {
     private String password;
     private String email;
     private String address;
+    private int money;
 
     public String getId() {
         return id;
@@ -63,5 +64,13 @@ public abstract class Person {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
     }
 }
