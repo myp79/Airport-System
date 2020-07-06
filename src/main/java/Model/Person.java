@@ -1,12 +1,13 @@
 package Model;
 
 public abstract class Person {
-    public String id;
-    public String name;
-    public String lastname;
-    public String username;
-    public String password;
-    public String email;
+    private String id;
+    private String name;
+    private String lastname;
+    private String username;
+    private String password;
+    private String email;
+    private String address;
 
     public String getId() {
         return id;
@@ -54,5 +55,13 @@ public abstract class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
