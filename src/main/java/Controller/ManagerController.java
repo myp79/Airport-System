@@ -1,5 +1,6 @@
 package Controller;
 
+import View.ManagerManage;
 import View.ManagerView;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -14,6 +15,7 @@ public class ManagerController {
             managerView.getBtnGroup().getChildren().addAll(managerView.getManger());
         }
         changeProfile();
+        managerBtn();
     }
 
     public void changeProfile() {
@@ -24,7 +26,15 @@ public class ManagerController {
             stage.setScene(new Scene(changeProfileController.getChangeProfileView()));
             stage.show();
         });
+    }
 
+    public void managerBtn(){
+        managerView.getManger().setOnAction(actionEvent -> {
+            ManagerManageController managerManageController = new ManagerManageController();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(managerManageController.getManagerManage()));
+            stage.show();
+        });
     }
 
     public void setUsername(String username) {

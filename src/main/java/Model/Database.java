@@ -30,7 +30,7 @@ public class Database {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            statement.executeUpdate(String.format("INSERT INTO person (name, lastname, email, idcard, address, money, username, password, roll) VALUES('%s','%s','%s','%s','%d','%s','%s','%s','%s')", name, lastname, email, address, money, idcard, username, password, roll));
+            statement.executeUpdate(String.format("INSERT INTO person (name, lastname, email, idcard, address, money, username, password, roll) VALUES('%s','%s','%s','%s','%s',%d,'%s','%s','%s')", name, lastname, email,idcard, address, money, username, password, roll));
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -13,6 +13,7 @@ public class SignUpView extends BorderPane {
     private JFXTextField lastname;
     private JFXTextField email;
     private JFXTextField idCard;
+    private JFXTextField address;
     private JFXTextField username;
     private JFXPasswordField password;
     private JFXButton submit;
@@ -22,6 +23,7 @@ public class SignUpView extends BorderPane {
         lastname = new JFXTextField();
         email = new JFXTextField();
         idCard = new JFXTextField();
+        address = new JFXTextField();
         username = new JFXTextField();
         password = new JFXPasswordField();
         submit = new JFXButton();
@@ -31,12 +33,14 @@ public class SignUpView extends BorderPane {
         lastname.setPromptText("Last name");
         email.setPromptText("Email");
         idCard.setPromptText("ID");
+        address.setPromptText("Address");
         username.setPromptText("Username");
         password.setPromptText("Password");
         submit.setText("Submit");
 
         // Make VBox for input
         VBox information = new VBox(name, lastname, email);
+        VBox info = new VBox(address);
         VBox loginInformation = new VBox(idCard, username, password);
         information.setAlignment(Pos.CENTER);
         loginInformation.setAlignment(Pos.CENTER);
@@ -45,9 +49,9 @@ public class SignUpView extends BorderPane {
         HBox btnGroup = new HBox(submit);
 
         // All be one
-        VBox all = new VBox(information, loginInformation, btnGroup);
+        VBox all = new VBox(information, info, loginInformation, btnGroup);
 
-        // Setting of Login View
+        // Setting of SignUpView
         this.setCenter(all);
     }
 
@@ -77,5 +81,9 @@ public class SignUpView extends BorderPane {
 
     public JFXButton getSubmit() {
         return submit;
+    }
+
+    public JFXTextField getAddress() {
+        return address;
     }
 }
