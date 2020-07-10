@@ -16,6 +16,7 @@ public class ManagerController {
         changeProfile();
         managerBtn();
         employeeBtn();
+        passengerBtn();
     }
 
     public void changeProfile() {
@@ -45,6 +46,15 @@ public class ManagerController {
             stage.show();
         });
 
+    }
+
+    public void passengerBtn(){
+        managerView.getPassengerManage().setOnAction(actionEvent -> {
+            PassengerManageController passengerManageController= new PassengerManageController();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(passengerManageController.getPassengerManage()));
+            stage.show();
+        });
     }
 
     public void setUsername(String username) {
