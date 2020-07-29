@@ -5,4 +5,19 @@ public class Ticket implements Showable {
     public void show() {
 
     }
+    private String id;
+    private String price;
+    private String crime;
+
+    public String getId() {
+        return id;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getCrime() {
+        return crime;
+    }
 }
