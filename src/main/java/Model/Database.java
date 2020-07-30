@@ -48,4 +48,15 @@ public class Database {
         }
 
     }
+
+    public static void update(String username,int money){
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("UPDATE person SET money=%d WHERE username='%s'", money, username));
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

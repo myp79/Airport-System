@@ -14,8 +14,8 @@ public class LoginController {
     }
 
     public void submitBtn() {
-        String username = loginView.getUsername().getText();
         loginView.getSubmit().setOnAction(actionEvent -> {
+        String username = loginView.getUsername().getText();
             String userRoll = Database.check(loginView.getUsername().getText(), loginView.getPassword().getText());
             if (userRoll != null) {
                 switch (userRoll) {

@@ -11,6 +11,7 @@ public class PassengerController {
     public PassengerController() {
         passengerView = new PassengerView();
         changeProfile();
+        moneyBtn();
     }
 
     public void changeProfile() {
@@ -22,6 +23,16 @@ public class PassengerController {
             stage.show();
         });
 
+    }
+
+    public void moneyBtn() {
+        passengerView.getMoney().setOnAction(actionEvent -> {
+            AddMoneyController addMoneyController = new AddMoneyController();
+            addMoneyController.setUsername(username);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(addMoneyController.getAddMoney()));
+            stage.show();
+        });
     }
 
     public void setUsername(String username) {
