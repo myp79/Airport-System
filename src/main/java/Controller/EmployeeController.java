@@ -11,7 +11,9 @@ public class EmployeeController {
     public EmployeeController() {
         employeeView = new EmployeeView();
         changeProfile();
+        massageBtn();
     }
+
     public void changeProfile() {
         employeeView.getProfile().setOnAction(actionEvent -> {
             ChangeProfileController changeProfileController = new ChangeProfileController();
@@ -21,6 +23,16 @@ public class EmployeeController {
             stage.show();
         });
 
+    }
+
+    public void massageBtn() {
+        employeeView.getMassage().setOnAction(actionEvent -> {
+            MassageController massageController = new MassageController();
+            massageController.setUsername(username);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(massageController.getMassageView()));
+            stage.show();
+        });
     }
 
     public void setUsername(String username) {

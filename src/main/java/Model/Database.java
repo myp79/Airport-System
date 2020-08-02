@@ -59,4 +59,15 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+    public static void add(String username,String massage){
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("INSERT INTO massage (username,massage) VALUES('%s','%s')", username, massage));
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

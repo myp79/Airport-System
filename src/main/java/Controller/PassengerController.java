@@ -12,6 +12,7 @@ public class PassengerController {
         passengerView = new PassengerView();
         changeProfile();
         moneyBtn();
+        massageBtn();
     }
 
     public void changeProfile() {
@@ -31,6 +32,16 @@ public class PassengerController {
             addMoneyController.setUsername(username);
             Stage stage = new Stage();
             stage.setScene(new Scene(addMoneyController.getAddMoney()));
+            stage.show();
+        });
+    }
+
+    public void massageBtn() {
+        passengerView.getMassage().setOnAction(actionEvent -> {
+            MassageController massageController = new MassageController();
+            massageController.setUsername(username);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(massageController.getMassageView()));
             stage.show();
         });
     }
