@@ -1,6 +1,5 @@
 package View;
 
-import Model.Database;
 import Model.Massage;
 import com.jfoenix.controls.JFXButton;
 import javafx.geometry.Pos;

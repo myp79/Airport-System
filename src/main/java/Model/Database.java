@@ -13,7 +13,8 @@ public class Database {
     private static String url = "jdbc:mysql://localhost:3306/Airport";
     private static String adminUser = "root";
     private static String adminPassword = "19376428";
-    private static List<Massage> massages=new ArrayList<>();
+    private static List<Massage> massages = new ArrayList<>();
+    private static List<Employee> employees = new ArrayList<>();
 
     public static String check(String username, String password) {
         try {
@@ -95,11 +96,41 @@ public class Database {
         }
     }
 
-    public static void delete(Massage massage){
+    public static void employees() {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            statement.executeUpdate(String.format("DELETE FROM massage WHERE username='%s' and massage='%s'",massage.getUsername(),massage.getMassage()));
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM person WHERE roll='employee'");
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                String lastname = resultSet.getString("lastname");
+                String email = resultSet.getString("email");
+                String id = resultSet.getString("idcard");
+                String address = resultSet.getString("address");
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                String money = resultSet.getString("money");
+                Employee employee = new Employee();
+                employee.setName(name);
+                employee.setLastname(lastname);
+                employee.setEmail(email);
+                employee.setId(id);
+                employee.setUsername(username);
+                employee.setPassword(password);
+                employee.setAddress(address);
+                employee.setMoney(Integer.parseInt(money));
+                employees.add(employee);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void delete(Massage massage) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("DELETE FROM massage WHERE username='%s' and massage='%s'", massage.getUsername(), massage.getMassage()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -111,5 +142,13 @@ public class Database {
         ObservableList<Massage> massages = FXCollections.observableArrayList();
         massages.addAll(Database.massages);
         return massages;
+    }
+
+    public static ObservableList<Employee> employeesForTable() {
+        Database.employees.clear();
+        employees();
+        ObservableList<Employee> employees = FXCollections.observableArrayList();
+        employees.addAll(Database.employees);
+        return employees;
     }
 }

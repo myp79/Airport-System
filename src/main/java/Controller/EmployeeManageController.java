@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Database;
 import View.EmployeeManage;
 
 public class EmployeeManageController {
@@ -8,6 +9,7 @@ public class EmployeeManageController {
 
     public EmployeeManageController() {
         employeeManage = new EmployeeManage();
+        employeeManage.getTable().setItems(Database.employeesForTable());
         addBtn();
     }
 
