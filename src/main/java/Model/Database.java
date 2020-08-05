@@ -95,6 +95,16 @@ public class Database {
         }
     }
 
+    public static void delete(Massage massage){
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("DELETE FROM massage WHERE username='%s' and massage='%s'",massage.getUsername(),massage.getMassage()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static ObservableList<Massage> massagesForTable() {
         Database.massages.clear();
         massages();
