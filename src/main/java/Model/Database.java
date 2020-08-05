@@ -1,6 +1,11 @@
 package Model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database {
     private static Connection connection;
@@ -8,6 +13,7 @@ public class Database {
     private static String url = "jdbc:mysql://localhost:3306/Airport";
     private static String adminUser = "root";
     private static String adminPassword = "19376428";
+    private static List<Massage> massages=new ArrayList<>();
 
     public static String check(String username, String password) {
         try {
@@ -30,7 +36,7 @@ public class Database {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            statement.executeUpdate(String.format("INSERT INTO person (name, lastname, email, idcard, address, money, username, password, roll) VALUES('%s','%s','%s','%s','%s',%d,'%s','%s','%s')", name, lastname, email,idcard, address, money, username, password, roll));
+            statement.executeUpdate(String.format("INSERT INTO person (name, lastname, email, idcard, address, money, username, password, roll) VALUES('%s','%s','%s','%s','%s',%d,'%s','%s','%s')", name, lastname, email, idcard, address, money, username, password, roll));
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -49,7 +55,7 @@ public class Database {
 
     }
 
-    public static void update(String username,int money){
+    public static void update(String username, int money) {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
@@ -60,7 +66,7 @@ public class Database {
         }
     }
 
-    public static void add(String username,String massage){
+    public static void add(String username, String massage) {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
@@ -69,5 +75,31 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void massages() {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM massage");
+            while (resultSet.next()) {
+                String username = resultSet.getString("username");
+                String userMassage = resultSet.getString("massage");
+                Massage massage = new Massage();
+                massage.setUsername(username);
+                massage.setMassage(userMassage);
+                massages.add(massage);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ObservableList<Massage> massagesForTable() {
+        Database.massages.clear();
+        massages();
+        ObservableList<Massage> massages = FXCollections.observableArrayList();
+        massages.addAll(Database.massages);
+        return massages;
     }
 }

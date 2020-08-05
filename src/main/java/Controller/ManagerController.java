@@ -18,6 +18,7 @@ public class ManagerController {
         employeeBtn();
         passengerBtn();
         flightBtn();
+        massageBtn();
     }
 
     public void changeProfile() {
@@ -30,7 +31,7 @@ public class ManagerController {
         });
     }
 
-    public void managerBtn(){
+    public void managerBtn() {
         managerView.getManger().setOnAction(actionEvent -> {
             ManagerManageController managerManageController = new ManagerManageController();
             Stage stage = new Stage();
@@ -39,9 +40,9 @@ public class ManagerController {
         });
     }
 
-    public void employeeBtn(){
+    public void employeeBtn() {
         managerView.getEmployeeManage().setOnAction(actionEvent -> {
-            EmployeeManageController employeeManageController= new EmployeeManageController();
+            EmployeeManageController employeeManageController = new EmployeeManageController();
             Stage stage = new Stage();
             stage.setScene(new Scene(employeeManageController.getEmployeeManage()));
             stage.show();
@@ -49,20 +50,29 @@ public class ManagerController {
 
     }
 
-    public void passengerBtn(){
+    public void passengerBtn() {
         managerView.getPassengerManage().setOnAction(actionEvent -> {
-            PassengerManageController passengerManageController= new PassengerManageController();
+            PassengerManageController passengerManageController = new PassengerManageController();
             Stage stage = new Stage();
             stage.setScene(new Scene(passengerManageController.getPassengerManage()));
             stage.show();
         });
     }
 
-    public void flightBtn(){
+    public void flightBtn() {
         managerView.getFlightManage().setOnAction(actionEvent -> {
-            FlightManagerController flightManagerController= new FlightManagerController();
+            FlightManagerController flightManagerController = new FlightManagerController();
             Stage stage = new Stage();
             stage.setScene(new Scene(flightManagerController.getFlightManager()));
+            stage.show();
+        });
+    }
+
+    public void massageBtn() {
+        managerView.getMassage().setOnAction(actionEvent -> {
+            MassageManageController massageManageController = new MassageManageController();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(massageManageController.getMassageManage()));
             stage.show();
         });
     }
