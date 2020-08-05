@@ -15,6 +15,7 @@ public class Database {
     private static String adminPassword = "19376428";
     private static List<Massage> massages = new ArrayList<>();
     private static List<Employee> employees = new ArrayList<>();
+    private static List<Manager> managers = new ArrayList<>();
 
     public static String check(String username, String password) {
         try {
@@ -126,6 +127,36 @@ public class Database {
         }
     }
 
+    public static void managers() {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM person WHERE roll='manager'");
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                String lastname = resultSet.getString("lastname");
+                String email = resultSet.getString("email");
+                String id = resultSet.getString("idcard");
+                String address = resultSet.getString("address");
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                String money = resultSet.getString("money");
+                Manager manager = new Manager();
+                manager.setName(name);
+                manager.setLastname(lastname);
+                manager.setEmail(email);
+                manager.setId(id);
+                manager.setUsername(username);
+                manager.setPassword(password);
+                manager.setAddress(address);
+                manager.setMoney(Integer.parseInt(money));
+                managers.add(manager);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void delete(Massage massage) {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
@@ -160,5 +191,13 @@ public class Database {
         ObservableList<Employee> employees = FXCollections.observableArrayList();
         employees.addAll(Database.employees);
         return employees;
+    }
+
+    public static ObservableList<Manager> managerForTable() {
+        Database.managers.clear();
+        managers();
+        ObservableList<Manager> managers = FXCollections.observableArrayList();
+        managers.addAll(Database.managers);
+        return managers;
     }
 }
