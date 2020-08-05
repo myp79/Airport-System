@@ -16,6 +16,7 @@ public class Database {
     private static List<Massage> massages = new ArrayList<>();
     private static List<Employee> employees = new ArrayList<>();
     private static List<Manager> managers = new ArrayList<>();
+    private static List<Passenger> passengers = new ArrayList<>();
 
     public static String check(String username, String password) {
         try {
@@ -157,6 +158,36 @@ public class Database {
         }
     }
 
+    public static void passengers() {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM person WHERE roll='passenger'");
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                String lastname = resultSet.getString("lastname");
+                String email = resultSet.getString("email");
+                String id = resultSet.getString("idcard");
+                String address = resultSet.getString("address");
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                String money = resultSet.getString("money");
+                Passenger passenger = new Passenger();
+                passenger.setName(name);
+                passenger.setLastname(lastname);
+                passenger.setEmail(email);
+                passenger.setId(id);
+                passenger.setUsername(username);
+                passenger.setPassword(password);
+                passenger.setAddress(address);
+                passenger.setMoney(Integer.parseInt(money));
+                passengers.add(passenger);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void delete(Massage massage) {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
@@ -199,5 +230,13 @@ public class Database {
         ObservableList<Manager> managers = FXCollections.observableArrayList();
         managers.addAll(Database.managers);
         return managers;
+    }
+
+    public static ObservableList<Passenger> passengerForTable() {
+        Database.passengers.clear();
+        passengers();
+        ObservableList<Passenger> passengers = FXCollections.observableArrayList();
+        passengers.addAll(Database.passengers);
+        return passengers;
     }
 }
