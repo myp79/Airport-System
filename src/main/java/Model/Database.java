@@ -136,6 +136,16 @@ public class Database {
         }
     }
 
+    public static void delete(Person person) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("DELETE FROM person WHERE username='%s'", person.getUsername()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static ObservableList<Massage> massagesForTable() {
         Database.massages.clear();
         massages();

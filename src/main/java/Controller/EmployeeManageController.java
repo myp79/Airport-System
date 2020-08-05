@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Database;
+import Model.Employee;
+import Model.Massage;
 import View.EmployeeManage;
 
 public class EmployeeManageController {
@@ -11,12 +13,24 @@ public class EmployeeManageController {
         employeeManage = new EmployeeManage();
         employeeManage.getTable().setItems(Database.employeesForTable());
         addBtn();
+        deleteBtn();
     }
 
     public void addBtn() {
         employeeManage.getAdd().setOnAction(actionEvent -> {
             AddEmployeeController addEmployeeController = new AddEmployeeController();
             employeeManage.getScene().setRoot(addEmployeeController.getAddEmployee());
+        });
+    }
+
+    public void deleteBtn() {
+        employeeManage.getDelete().setOnAction(actionEvent -> {
+            Employee employee = employeeManage.getTable().getSelectionModel().getSelectedItem();
+            if (employee != null) {
+                Database.delete(employee);
+                EmployeeManageController employeeManageController = new EmployeeManageController();
+                this.getEmployeeManage().getScene().setRoot(employeeManageController.getEmployeeManage());
+            }
         });
     }
 
