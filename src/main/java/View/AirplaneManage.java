@@ -22,7 +22,7 @@ public class AirplaneManage extends BorderPane {
         delete = new JFXButton();
         table = new TableView<>();
         TableColumn<Airplane, String> idCardCol = new TableColumn<>("ID");
-        TableColumn<Airplane, String> chairsCol = new TableColumn<>("Name");
+        TableColumn<Airplane, String> chairsCol = new TableColumn<>("Capacity");
         idCardCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         chairsCol.setCellValueFactory(new PropertyValueFactory<>("chairs"));
         table.getColumns().addAll( idCardCol, chairsCol);

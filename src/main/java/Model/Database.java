@@ -17,6 +17,7 @@ public class Database {
     private static List<Employee> employees = new ArrayList<>();
     private static List<Manager> managers = new ArrayList<>();
     private static List<Passenger> passengers = new ArrayList<>();
+    private static List<Airplane> airplanes = new ArrayList<>();
 
     public static String check(String username, String password) {
         try {
@@ -74,6 +75,17 @@ public class Database {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
             statement.executeUpdate(String.format("INSERT INTO massage (username,massage) VALUES('%s','%s')", username, massage));
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void add(Airplane airplane) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("INSERT INTO airplane (idNo,chair) VALUES('%s', '%d' )", airplane.getId(),airplane.getChairs()));
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -188,6 +200,24 @@ public class Database {
         }
     }
 
+    public static void airplanes(){
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM airplane");
+            while (resultSet.next()) {
+                String id = resultSet.getString("idNo");
+                String capacity = resultSet.getString("chair");
+                Airplane airplane = new Airplane();
+                airplane.setId(id);
+                airplane.setChairs(Integer.parseInt(capacity));
+                airplanes.add(airplane);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void delete(Massage massage) {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
@@ -203,6 +233,16 @@ public class Database {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
             statement.executeUpdate(String.format("DELETE FROM person WHERE username='%s'", person.getUsername()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void delete(Airplane airplane) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("DELETE FROM airplane WHERE idNo='%s'", airplane.getId()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -238,5 +278,13 @@ public class Database {
         ObservableList<Passenger> passengers = FXCollections.observableArrayList();
         passengers.addAll(Database.passengers);
         return passengers;
+    }
+
+    public static ObservableList<Airplane> airplanesForTable() {
+        Database.airplanes.clear();
+        airplanes();
+        ObservableList<Airplane> airplanes = FXCollections.observableArrayList();
+        airplanes.addAll(Database.airplanes);
+        return airplanes;
     }
 }

@@ -23,4 +23,12 @@ public class Airplane implements Showable {
     public List<Flight> getFlightList() {
         return flightList;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setChairs(int chairs) {
+        this.chairs = chairs;
+    }
 }
