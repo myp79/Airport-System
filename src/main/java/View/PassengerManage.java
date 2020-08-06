@@ -19,14 +19,14 @@ public class PassengerManage extends BorderPane {
         edit = new JFXButton();
         delete = new JFXButton();
         table = new TableView<>();
-        TableColumn<Passenger,String> nameCol = new TableColumn<>("Name");
-        TableColumn<Passenger,String> lastnameCol = new TableColumn<>("Lastname");
-        TableColumn<Passenger,String> idCardCol = new TableColumn<>("ID");
-        TableColumn<Passenger ,String> emailCol = new TableColumn<>("Email");
-        TableColumn<Passenger ,String> addressCol = new TableColumn<>("Address");
-        TableColumn<Passenger,String> usernameCol = new TableColumn<>("Username");
-        TableColumn<Passenger,String> passwordCol = new TableColumn<>("Password");
-        TableColumn<Passenger ,Integer> moneyCol = new TableColumn<>("Money");
+        TableColumn<Passenger, String> nameCol = new TableColumn<>("Name");
+        TableColumn<Passenger, String> lastnameCol = new TableColumn<>("Lastname");
+        TableColumn<Passenger, String> idCardCol = new TableColumn<>("ID");
+        TableColumn<Passenger, String> emailCol = new TableColumn<>("Email");
+        TableColumn<Passenger, String> addressCol = new TableColumn<>("Address");
+        TableColumn<Passenger, String> usernameCol = new TableColumn<>("Username");
+        TableColumn<Passenger, String> passwordCol = new TableColumn<>("Password");
+        TableColumn<Passenger, Integer> moneyCol = new TableColumn<>("Money");
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         lastnameCol.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         idCardCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -35,7 +35,7 @@ public class PassengerManage extends BorderPane {
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
         passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
         moneyCol.setCellValueFactory(new PropertyValueFactory<>("money"));
-        table.getColumns().addAll(nameCol,lastnameCol,idCardCol,emailCol,addressCol,usernameCol,passwordCol,moneyCol);
+        table.getColumns().addAll(nameCol, lastnameCol, idCardCol, emailCol, addressCol, usernameCol, passwordCol, moneyCol);
 
         // Text
         edit.setText("Edit Passenger");

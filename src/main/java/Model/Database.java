@@ -18,6 +18,7 @@ public class Database {
     private static List<Manager> managers = new ArrayList<>();
     private static List<Passenger> passengers = new ArrayList<>();
     private static List<Airplane> airplanes = new ArrayList<>();
+    private static List<Flight> flights = new ArrayList<>();
 
     public static String check(String username, String password) {
         try {
@@ -85,7 +86,18 @@ public class Database {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            statement.executeUpdate(String.format("INSERT INTO airplane (idNo,chair) VALUES('%s', '%d' )", airplane.getId(),airplane.getChairs()));
+            statement.executeUpdate(String.format("INSERT INTO airplane (idNo,chair) VALUES('%s', '%d' )", airplane.getId(), airplane.getChairs()));
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void add(Flight flight) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("INSERT INTO flight (IdNo, airplane, ticket, source, destination, date, time, sell, duration) VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s') ", flight.getId(),flight.getAirplane(),flight.getTicket(),flight.getSource(),flight.getDestination(),flight.getDate(),flight.getTime(),flight.getNo(),flight.getDuration()));
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -200,7 +212,7 @@ public class Database {
         }
     }
 
-    public static void airplanes(){
+    public static void airplanes() {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
@@ -212,6 +224,38 @@ public class Database {
                 airplane.setId(id);
                 airplane.setChairs(Integer.parseInt(capacity));
                 airplanes.add(airplane);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void flights() {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM flight");
+            while (resultSet.next()) {
+                String id = resultSet.getString("idNo");
+                String airplane = resultSet.getString("airplane");
+                String ticket = resultSet.getString("ticket");
+                String source = resultSet.getString("source");
+                String destination = resultSet.getString("destination");
+                String date = resultSet.getString("date");
+                String time = resultSet.getString("time");
+                String sell = resultSet.getString("sell");
+                String duration = resultSet.getString("duration");
+                Flight flight = new Flight();
+                flight.setId(id);
+                flight.setAirplane(airplane);
+                flight.setDate(date);
+                flight.setDestination(destination);
+                flight.setSource(source);
+                flight.setNo(sell);
+                flight.setTime(time);
+                flight.setTicket(ticket);
+                flight.setDuration(duration);
+                flights.add(flight);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -243,6 +287,16 @@ public class Database {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
             statement.executeUpdate(String.format("DELETE FROM airplane WHERE idNo='%s'", airplane.getId()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void delete(Flight flight) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("DELETE FROM flight WHERE idNo='%s'", flight.getId()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -286,5 +340,13 @@ public class Database {
         ObservableList<Airplane> airplanes = FXCollections.observableArrayList();
         airplanes.addAll(Database.airplanes);
         return airplanes;
+    }
+
+    public static ObservableList<Flight> flightsForTable() {
+        Database.flights.clear();
+        flights();
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
+        flights.addAll(Database.flights);
+        return flights;
     }
 }

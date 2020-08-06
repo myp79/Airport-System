@@ -16,6 +16,7 @@ public class AddFlight extends BorderPane {
     private JFXTextField destination;
     private JFXTextField date;
     private JFXTextField time;
+    private JFXTextField duration;
     private JFXButton submit;
 
     public AddFlight() {
@@ -26,6 +27,7 @@ public class AddFlight extends BorderPane {
         destination = new JFXTextField();
         date = new JFXTextField();
         time = new JFXTextField();
+        duration = new JFXTextField();
         submit = new JFXButton();
 
         // Text
@@ -36,12 +38,13 @@ public class AddFlight extends BorderPane {
         destination.setPromptText("Destination");
         date.setPromptText("Date");
         time.setPromptText("Time");
+        duration.setPromptText("Duration");
         submit.setText("Submit");
 
         // Make VBox for input
         VBox information = new VBox(idNum, airplane, tickets);
         VBox info = new VBox(source);
-        VBox loginInformation = new VBox(destination, date, time);
+        VBox loginInformation = new VBox(destination, date, time,duration);
         information.setAlignment(Pos.CENTER);
         loginInformation.setAlignment(Pos.CENTER);
 
@@ -86,6 +89,10 @@ public class AddFlight extends BorderPane {
 
     public JFXButton getSubmit() {
         return submit;
+    }
+
+    public JFXTextField getDuration() {
+        return duration;
     }
 }
 
