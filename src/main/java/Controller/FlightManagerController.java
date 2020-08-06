@@ -24,9 +24,11 @@ public class FlightManagerController {
     public void deleteBtn() {
         flightManager.getDelete().setOnAction(actionEvent -> {
             Flight flight = flightManager.getTable().getSelectionModel().getSelectedItem();
-            Database.delete(flight);
-            FlightManagerController flightManagerController = new FlightManagerController();
-            this.flightManager.getScene().setRoot(flightManagerController.getFlightManager());
+            if (flight!=null) {
+                Database.delete(flight);
+                FlightManagerController flightManagerController = new FlightManagerController();
+                this.flightManager.getScene().setRoot(flightManagerController.getFlightManager());
+            }
         });
     }
 

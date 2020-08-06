@@ -12,6 +12,7 @@ public class EmployeeController {
         employeeView = new EmployeeView();
         changeProfile();
         massageBtn();
+        flightBtn();
     }
 
     public void changeProfile() {
@@ -31,6 +32,15 @@ public class EmployeeController {
             massageController.setUsername(username);
             Stage stage = new Stage();
             stage.setScene(new Scene(massageController.getMassageView()));
+            stage.show();
+        });
+    }
+
+    public void flightBtn() {
+        employeeView.getFlightManage().setOnAction(actionEvent -> {
+            FlightManagerController flightManagerController = new FlightManagerController();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(flightManagerController.getFlightManager()));
             stage.show();
         });
     }
