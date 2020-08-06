@@ -12,6 +12,7 @@ public class ManagerView extends BorderPane {
     private JFXButton flightManage;
     private JFXButton massage;
     private JFXButton manger;
+    private JFXButton airplane;
     private VBox btnGroup;
 
     public ManagerView() {
@@ -21,6 +22,7 @@ public class ManagerView extends BorderPane {
         flightManage = new JFXButton();
         massage = new JFXButton();
         manger = new JFXButton();
+        airplane = new JFXButton();
         btnGroup = new VBox();
 
         // Text
@@ -30,9 +32,10 @@ public class ManagerView extends BorderPane {
         flightManage.setText("Flight");
         massage.setText("Massage");
         manger.setText("Manager");
+        airplane.setText("Airplane");
 
         // Add all to the btnGroup
-        btnGroup.getChildren().addAll(employeeManage, profile, passengerManage, flightManage, massage);
+        btnGroup.getChildren().addAll(employeeManage, profile, passengerManage, airplane,flightManage, massage);
         btnGroup.setAlignment(Pos.CENTER);
 
         // Setting of Manager View
@@ -65,5 +68,9 @@ public class ManagerView extends BorderPane {
 
     public VBox getBtnGroup() {
         return btnGroup;
+    }
+
+    public JFXButton getAirplane() {
+        return airplane;
     }
 }

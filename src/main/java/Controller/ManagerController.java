@@ -19,6 +19,7 @@ public class ManagerController {
         passengerBtn();
         flightBtn();
         massageBtn();
+        airplaneBtn();
     }
 
     public void changeProfile() {
@@ -77,6 +78,14 @@ public class ManagerController {
         });
     }
 
+    public void airplaneBtn() {
+        managerView.getAirplane().setOnAction(actionEvent -> {
+            AirplaneManageController airplaneManageController = new AirplaneManageController();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(airplaneManageController.getAirplaneManage()));
+            stage.show();
+        });
+    }
 
     public void setUsername(String username) {
         this.username = username;
