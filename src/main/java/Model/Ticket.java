@@ -20,4 +20,16 @@ public class Ticket implements Showable {
     public String getCrime() {
         return crime;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public void setCrime(String crime) {
+        this.crime = crime;
+    }
 }
