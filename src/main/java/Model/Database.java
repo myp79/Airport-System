@@ -19,6 +19,7 @@ public class Database {
     private static List<Passenger> passengers = new ArrayList<>();
     private static List<Airplane> airplanes = new ArrayList<>();
     private static List<Flight> flights = new ArrayList<>();
+    private static List<Ticket> tickets = new ArrayList<>();
 
     public static String check(String username, String password) {
         try {
@@ -71,6 +72,17 @@ public class Database {
         }
     }
 
+    public static void update(Flight flight, String number) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("UPDATE flight SET sell='%d' WHERE airplane='%s'", Integer.parseInt(number) + Integer.parseInt(flight.getNo()), flight.getAirplane()));
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void add(String username, String massage) {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
@@ -97,7 +109,18 @@ public class Database {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            statement.executeUpdate(String.format("INSERT INTO flight (IdNo, airplane, ticket, source, destination, date, time, sell, duration) VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s') ", flight.getId(),flight.getAirplane(),flight.getTicket(),flight.getSource(),flight.getDestination(),flight.getDate(),flight.getTime(),flight.getNo(),flight.getDuration()));
+            statement.executeUpdate(String.format("INSERT INTO flight (IdNo, airplane, ticket, source, destination, date, time, sell, duration) VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s') ", flight.getId(), flight.getAirplane(), flight.getTicket(), flight.getSource(), flight.getDestination(), flight.getDate(), flight.getTime(), flight.getNo(), flight.getDuration()));
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void add(Ticket ticket, String username, Flight flight) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("INSERT INTO ticket (person, ticketId, flightId) VALUES('%s','%s','%s') ", username, ticket.getId(), flight.getId()));
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -262,6 +285,24 @@ public class Database {
         }
     }
 
+    public static void tickets() {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM ticket"));
+            while (resultSet.next()) {
+                String id = resultSet.getString("ticketId");
+                String flightId = resultSet.getString("flightId");
+                Ticket ticket = new Ticket();
+                ticket.setId(id);
+                ticket.setFlightId(flightId);
+                tickets.add(ticket);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void delete(Massage massage) {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
@@ -348,5 +389,13 @@ public class Database {
         ObservableList<Flight> flights = FXCollections.observableArrayList();
         flights.addAll(Database.flights);
         return flights;
+    }
+
+    public static ObservableList<Ticket> ticketsForTable() {
+        Database.tickets.clear();
+        tickets();
+        ObservableList<Ticket> tickets = FXCollections.observableArrayList();
+        tickets.addAll(Database.tickets);
+        return tickets;
     }
 }

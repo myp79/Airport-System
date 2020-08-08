@@ -8,6 +8,10 @@ public class PassengerController {
     private PassengerView passengerView;
     private String username;
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public PassengerController() {
         passengerView = new PassengerView();
         changeProfile();
@@ -57,9 +61,6 @@ public class PassengerController {
         });
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public PassengerView getPassengerView() {
         return passengerView;

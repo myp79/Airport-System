@@ -5,9 +5,12 @@ public class Ticket implements Showable {
     public void show() {
 
     }
+
     private String id;
     private String price;
     private String crime;
+    private String flightId;
+    private String person;
 
     public String getId() {
         return id;
@@ -31,5 +34,21 @@ public class Ticket implements Showable {
 
     public void setCrime(String crime) {
         this.crime = crime;
+    }
+
+    public String getFlightId() {
+        return flightId;
+    }
+
+    public void setFlightId(String flightId) {
+        this.flightId = flightId;
+    }
+
+    public String getPerson() {
+        return person;
+    }
+
+    public void setPerson(String person) {
+        this.person = person;
     }
 }
