@@ -5,7 +5,7 @@ import java.util.List;
 public class Airplane implements Showable {
     @Override
     public void show() {
-
+        System.out.println(id + " " + chairs);
     }
 
     private String id;

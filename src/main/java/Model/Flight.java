@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Flight implements Showable {
     @Override
     public void show() {
-
+        System.out.println(id + " " + source + " " + destination);
     }
 
     private String id;

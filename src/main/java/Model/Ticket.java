@@ -3,7 +3,7 @@ package Model;
 public class Ticket implements Showable {
     @Override
     public void show() {
-
+        System.out.println(id + " " + flightId);
     }
 
     private String id;
