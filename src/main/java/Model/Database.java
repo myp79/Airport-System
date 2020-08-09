@@ -72,11 +72,22 @@ public class Database {
         }
     }
 
-    public static void update(Flight flight, String number) {
+    public static void update(Flight flight, int number) {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            statement.executeUpdate(String.format("UPDATE flight SET sell='%d' WHERE airplane='%s'", Integer.parseInt(number) + Integer.parseInt(flight.getNo()), flight.getAirplane()));
+            statement.executeUpdate(String.format("UPDATE flight SET sell='%d' WHERE airplane='%s'", number + Integer.parseInt(flight.getNo()), flight.getAirplane()));
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void update(Flight flight, String flightOldId) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("UPDATE flight SET IdNo='%s',airplane='%s',ticket='%s',source='%s',destination='%s',date='%s',time='%s',sell='%s',duration='%s' WHERE IdNo='%s'", flight.getId(), flight.getAirplane(), flight.getTicket(), flight.getSource(), flight.getDestination(), flight.getDate(), flight.getTime(), flight.getNo(), flight.getDuration(), flightOldId));
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -379,7 +390,7 @@ public class Database {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM ticket WHERE person='%s'",username));
+            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM ticket WHERE person='%s'", username));
             while (resultSet.next()) {
                 String id = resultSet.getString("ticketId");
                 String flightId = resultSet.getString("flightId");

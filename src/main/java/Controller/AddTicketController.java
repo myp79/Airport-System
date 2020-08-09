@@ -23,7 +23,7 @@ public class AddTicketController {
             Flight flight = addTicket.getTable().getSelectionModel().getSelectedItem();
             String number = addTicket.getNumber().getText();
             if (flight != null) {
-                Database.update(flight, number);
+                Database.update(flight, Integer.parseInt(number));
                 for (int i = 0; i < Integer.parseInt(number); i++) {
                     Random random = new Random();
                     int ticketId = random.nextInt(1000000);
