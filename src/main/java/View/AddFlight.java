@@ -1,7 +1,9 @@
 package View;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTimePicker;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -14,8 +16,8 @@ public class AddFlight extends BorderPane {
     private JFXTextField tickets;
     private JFXTextField source;
     private JFXTextField destination;
-    private JFXTextField date;
-    private JFXTextField time;
+    private JFXDatePicker date;
+    private JFXTimePicker time;
     private JFXTextField duration;
     private JFXButton submit;
 
@@ -25,8 +27,8 @@ public class AddFlight extends BorderPane {
         tickets = new JFXTextField();
         source = new JFXTextField();
         destination = new JFXTextField();
-        date = new JFXTextField();
-        time = new JFXTextField();
+        date = new JFXDatePicker();
+        time = new JFXTimePicker();
         duration = new JFXTextField();
         submit = new JFXButton();
 
@@ -44,7 +46,7 @@ public class AddFlight extends BorderPane {
         // Make VBox for input
         VBox information = new VBox(idNum, airplane, tickets);
         VBox info = new VBox(source);
-        VBox loginInformation = new VBox(destination, date, time,duration);
+        VBox loginInformation = new VBox(destination, date, time, duration);
         information.setAlignment(Pos.CENTER);
         loginInformation.setAlignment(Pos.CENTER);
 
@@ -56,7 +58,7 @@ public class AddFlight extends BorderPane {
 
         // Setting of AddEmployee
         this.setCenter(all);
-        
+
     }
 
     public JFXTextField getIdNum() {
@@ -79,11 +81,11 @@ public class AddFlight extends BorderPane {
         return destination;
     }
 
-    public JFXTextField getDate() {
+    public JFXDatePicker getDate() {
         return date;
     }
 
-    public JFXTextField getTime() {
+    public JFXTimePicker getTime() {
         return time;
     }
 
