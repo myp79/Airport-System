@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Database;
+import Model.Ticket;
 import View.TicketView;
 
 public class TicketController {
@@ -11,11 +12,12 @@ public class TicketController {
         this.username = username;
     }
 
-    public TicketController() {
+
+    public TicketController(String username) {
         ticketView = new TicketView();
-        // problem for user
-        ticketView.getTable().setItems(Database.ticketsForTable());
+        ticketView.getTable().setItems(Database.ticketsForTable(username));
         addBtn();
+        deleteBtn();
     }
 
     public void addBtn() {
@@ -26,9 +28,23 @@ public class TicketController {
         });
     }
 
+    public void deleteBtn() {
+        ticketView.getDelete().setOnAction(actionEvent -> {
+            Ticket ticket = ticketView.getTable().getSelectionModel().getSelectedItem();
+            if (ticket != null) {
+                Database.delete(ticket);
+                TicketController ticketController = new TicketController(username);
+                ticketController.setUsername(username);
+                this.getTicketView().getScene().setRoot(ticketController.getTicketView());
+            }
+        });
+    }
+
     public TicketView getTicketView() {
         return ticketView;
     }
 
-
+    public String getUsername() {
+        return username;
+    }
 }

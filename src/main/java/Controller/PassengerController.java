@@ -53,7 +53,7 @@ public class PassengerController {
 
     public void ticketBtn() {
         passengerView.getBuyTicket().setOnAction(actionEvent -> {
-            TicketController ticketController = new TicketController();
+            TicketController ticketController = new TicketController(username);
             ticketController.setUsername(username);
             Stage stage = new Stage();
             stage.setScene(new Scene(ticketController.getTicketView()));

@@ -83,6 +83,21 @@ public class Database {
         }
     }
 
+    public static void update(Ticket ticket) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(String.format("SELECT  * FROM flight WHERE IdNo='%d'",Integer.parseInt(ticket.getFlightId())));
+            while (!resultSet.next()){
+                String sell = resultSet.getString("sell");
+                statement.executeUpdate(String.format("UPDATE flight SET sell='%s' WHERE IdNo='%s'", (Integer.parseInt(sell) - 1),ticket.getFlightId()));
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void add(String username, String massage) {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
@@ -285,11 +300,11 @@ public class Database {
         }
     }
 
-    public static void tickets() {
+    public static void tickets(String username) {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM ticket"));
+            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM ticket WHERE person='%s'",username));
             while (resultSet.next()) {
                 String id = resultSet.getString("ticketId");
                 String flightId = resultSet.getString("flightId");
@@ -343,6 +358,17 @@ public class Database {
         }
     }
 
+    public static void delete(Ticket ticket) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("DELETE FROM ticket WHERE ticketId='%s'", ticket.getId()));
+            update(ticket);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static ObservableList<Massage> massagesForTable() {
         Database.massages.clear();
         massages();
@@ -391,9 +417,9 @@ public class Database {
         return flights;
     }
 
-    public static ObservableList<Ticket> ticketsForTable() {
+    public static ObservableList<Ticket> ticketsForTable(String username) {
         Database.tickets.clear();
-        tickets();
+        tickets(username);
         ObservableList<Ticket> tickets = FXCollections.observableArrayList();
         tickets.addAll(Database.tickets);
         return tickets;

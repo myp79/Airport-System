@@ -31,7 +31,7 @@ public class AddTicketController {
                     ticket.setId(Integer.toString(ticketId));
                     Database.add(ticket, username, flight);
                 }
-                TicketController ticketController = new TicketController();
+                TicketController ticketController = new TicketController(username);
                 addTicket.getScene().setRoot(ticketController.getTicketView());
             }
         });
