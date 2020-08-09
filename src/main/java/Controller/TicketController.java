@@ -3,6 +3,7 @@ package Controller;
 import Model.Database;
 import Model.Ticket;
 import View.TicketView;
+import javafx.scene.control.Alert;
 
 public class TicketController {
     private TicketView ticketView;
@@ -36,6 +37,11 @@ public class TicketController {
                 TicketController ticketController = new TicketController(username);
                 ticketController.setUsername(username);
                 this.getTicketView().getScene().setRoot(ticketController.getTicketView());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Error");
+                alert.setContentText("Please Select an item.");
+                alert.show();
             }
         });
     }

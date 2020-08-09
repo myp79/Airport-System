@@ -4,6 +4,7 @@ import Model.Database;
 import Model.Flight;
 import Model.Ticket;
 import View.AddTicket;
+import javafx.scene.control.Alert;
 
 import java.util.Random;
 
@@ -23,17 +24,37 @@ public class AddTicketController {
             Flight flight = addTicket.getTable().getSelectionModel().getSelectedItem();
             String number = addTicket.getNumber().getText();
             if (flight != null) {
-                Database.update(flight, Integer.parseInt(number));
-                for (int i = 0; i < Integer.parseInt(number); i++) {
-                    Random random = new Random();
-                    int ticketId = random.nextInt(1000000);
-                    Ticket ticket = new Ticket();
-                    ticket.setId(Integer.toString(ticketId));
-                    Database.add(ticket, username, flight);
+                if (number.equals("")) {
+                    if (number.matches("\\d+\\D+")) {
+                        Database.update(flight, Integer.parseInt(number));
+                        for (int i = 0; i < Integer.parseInt(number); i++) {
+                            Random random = new Random();
+                            int ticketId = random.nextInt(1000000);
+                            Ticket ticket = new Ticket();
+                            ticket.setId(Integer.toString(ticketId));
+                            Database.add(ticket, username, flight);
+                        }
+                        TicketController ticketController = new TicketController(username);
+                        addTicket.getScene().setRoot(ticketController.getTicketView());
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Number Error");
+                        alert.setContentText("Number contains word and number. Check it.");
+                        alert.show();
+                    }
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Number Error");
+                    alert.setContentText("Please enter a number.");
+                    alert.show();
                 }
-                TicketController ticketController = new TicketController(username);
-                addTicket.getScene().setRoot(ticketController.getTicketView());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Error");
+                alert.setContentText("Please Select an item.");
+                alert.show();
             }
+
         });
     }
 
