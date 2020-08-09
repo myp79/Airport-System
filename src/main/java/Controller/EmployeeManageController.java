@@ -2,8 +2,8 @@ package Controller;
 
 import Model.Database;
 import Model.Employee;
-import Model.Massage;
 import View.EmployeeManage;
+import javafx.scene.control.Alert;
 
 public class EmployeeManageController {
 
@@ -31,6 +31,11 @@ public class EmployeeManageController {
                 Database.delete(employee);
                 EmployeeManageController employeeManageController = new EmployeeManageController();
                 this.getEmployeeManage().getScene().setRoot(employeeManageController.getEmployeeManage());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Error");
+                alert.setContentText("Please Select an item.");
+                alert.show();
             }
         });
     }
@@ -49,6 +54,11 @@ public class EmployeeManageController {
                 personEditController.getPersonEdit().getMoney().setText(Integer.toString(employee.getMoney()));
                 personEditController.setRoll(Employee.class.getTypeName());
                 personEditController.setUsername(employee.getUsername());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Error");
+                alert.setContentText("Please Select an item.");
+                alert.show();
             }
         });
     }
