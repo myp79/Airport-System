@@ -16,6 +16,7 @@ public class AddEmployee extends BorderPane {
     private JFXTextField idCard;
     private JFXTextField username;
     private JFXTextField address;
+    private JFXTextField money;
     private JFXPasswordField password;
     private JFXButton submit;
 
@@ -25,6 +26,7 @@ public class AddEmployee extends BorderPane {
         email = new JFXTextField();
         idCard = new JFXTextField();
         address = new JFXTextField();
+        money = new JFXTextField();
         username = new JFXTextField();
         password = new JFXPasswordField();
         submit = new JFXButton();
@@ -35,13 +37,14 @@ public class AddEmployee extends BorderPane {
         email.setPromptText("Email");
         idCard.setPromptText("ID");
         address.setPromptText("Address");
+        money.setPromptText("Money");
         username.setPromptText("Username");
         password.setPromptText("Password");
         submit.setText("Submit");
 
         // Make VBox for input
         VBox information = new VBox(name, lastname, email);
-        VBox info = new VBox(address);
+        VBox info = new VBox(address, money);
         VBox loginInformation = new VBox(idCard, username, password);
         information.setAlignment(Pos.CENTER);
         loginInformation.setAlignment(Pos.CENTER);
@@ -87,5 +90,9 @@ public class AddEmployee extends BorderPane {
 
     public JFXTextField getAddress() {
         return address;
+    }
+
+    public JFXTextField getMoney() {
+        return money;
     }
 }
