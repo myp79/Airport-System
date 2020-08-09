@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Database;
 import View.ChangeProfileView;
+import javafx.scene.control.Alert;
 
 public class ChangeProfileController {
     private ChangeProfileView changeProfileView;
@@ -14,7 +15,15 @@ public class ChangeProfileController {
 
     public void submitBtn() {
         changeProfileView.getSubmit().setOnAction(actionEvent -> {
-            Database.update(username, changeProfileView.getPassword().getText());
+            String password = changeProfileView.getPassword().getText();
+            if (!password.equals("")) {
+                Database.update(username, password);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Password Error");
+                alert.setContentText("Please Enter a password");
+                alert.show();
+            }
         });
 
     }
