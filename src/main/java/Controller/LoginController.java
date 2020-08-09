@@ -11,11 +11,12 @@ public class LoginController {
         loginView = new LoginView();
         submitBtn();
         signUp();
+        forgotPasswordTBtn();
     }
 
     public void submitBtn() {
         loginView.getSubmit().setOnAction(actionEvent -> {
-        String username = loginView.getUsername().getText();
+            String username = loginView.getUsername().getText();
             String userRoll = Database.check(loginView.getUsername().getText(), loginView.getPassword().getText());
             if (userRoll != null) {
                 switch (userRoll) {
@@ -51,6 +52,14 @@ public class LoginController {
             SignUpController signUpController = new SignUpController();
             loginView.getScene().setRoot(signUpController.getSignUpView());
         });
+    }
+
+    public void forgotPasswordTBtn() {
+        loginView.getForgotPassword().setOnAction(actionEvent -> {
+            ForgotPasswordController forgotPasswordController = new ForgotPasswordController();
+            loginView.getScene().setRoot(forgotPasswordController.getForgotPassword());
+        });
+
     }
 
 

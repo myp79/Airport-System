@@ -8,33 +8,28 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class LoginView extends BorderPane {
-    private JFXTextField username;
-    private JFXPasswordField password;
-    private JFXButton submit;
-    private JFXButton forgotPassword;
-    private JFXButton signUp;
+public class ForgotPassword extends BorderPane {
 
-    public LoginView() {
+    private JFXTextField username;
+    private JFXTextField email;
+    private JFXButton submit;
+
+    public ForgotPassword() {
         username = new JFXTextField();
-        password = new JFXPasswordField();
+        email = new JFXTextField();
         submit = new JFXButton();
-        signUp = new JFXButton();
-        forgotPassword = new JFXButton();
 
         // Text
         username.setPromptText("Username");
-        password.setPromptText("Password");
+        email.setPromptText("Email");
         submit.setText("Submit");
-        signUp.setText("Sign Up");
-        forgotPassword.setText("Forgot Password");
 
         // Make VBox for input
-        VBox information = new VBox(username, password);
+        VBox information = new VBox(username, email);
         information.setAlignment(Pos.CENTER);
 
         // Make HBox for button
-        HBox btnGroup = new HBox(submit, signUp, forgotPassword);
+        HBox btnGroup = new HBox(submit);
 
         // All be one
         VBox all = new VBox(information, btnGroup);
@@ -48,19 +43,11 @@ public class LoginView extends BorderPane {
         return username;
     }
 
-    public JFXPasswordField getPassword() {
-        return password;
+    public JFXTextField getEmail() {
+        return email;
     }
 
     public JFXButton getSubmit() {
         return submit;
-    }
-
-    public JFXButton getSignUp() {
-        return signUp;
-    }
-
-    public JFXButton getForgotPassword() {
-        return forgotPassword;
     }
 }

@@ -455,6 +455,20 @@ public class Database {
         }
     }
 
+    public static String forgotPassword(String username, String email) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM person WHERE username='%s' AND email='%s'", username, email));
+            while (resultSet.next()) {
+                return resultSet.getString("password");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static ObservableList<Massage> massagesForTable() {
         Database.massages.clear();
         massages();
