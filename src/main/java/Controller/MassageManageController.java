@@ -3,6 +3,7 @@ package Controller;
 import Model.Database;
 import Model.Massage;
 import View.MassageManage;
+import javafx.scene.control.Alert;
 
 public class MassageManageController {
     private MassageManage massageManage;
@@ -20,6 +21,11 @@ public class MassageManageController {
                 Database.delete(massage);
                 MassageManageController massageManageController = new MassageManageController();
                 this.getMassageManage().getScene().setRoot(massageManageController.getMassageManage());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Error");
+                alert.setContentText("Please Select an item.");
+                alert.show();
             }
         });
     }
