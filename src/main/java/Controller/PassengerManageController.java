@@ -2,8 +2,8 @@ package Controller;
 
 import Model.Database;
 import Model.Passenger;
-import Model.Passenger;
 import View.PassengerManage;
+import javafx.scene.control.Alert;
 
 public class PassengerManageController {
 
@@ -23,7 +23,13 @@ public class PassengerManageController {
                 Database.delete(passenger);
                 PassengerManageController passengerManageController = new PassengerManageController();
                 this.getPassengerManage().getScene().setRoot(passengerManageController.getPassengerManage());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Error");
+                alert.setContentText("Please Select an item.");
+                alert.show();
             }
+
         });
     }
 
@@ -41,6 +47,11 @@ public class PassengerManageController {
                 personEditController.getPersonEdit().getMoney().setText(Integer.toString(passenger.getMoney()));
                 personEditController.setRoll(Passenger.class.getTypeName());
                 personEditController.setUsername(passenger.getUsername());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Error");
+                alert.setContentText("Please Select an item.");
+                alert.show();
             }
         });
     }
