@@ -4,6 +4,7 @@ import Model.Database;
 import Model.Manager;
 import Model.Manager;
 import View.ManagerManage;
+import javafx.scene.control.Alert;
 
 public class ManagerManageController {
 
@@ -31,6 +32,11 @@ public class ManagerManageController {
                 Database.delete(manager);
                 ManagerManageController managerManageController = new ManagerManageController();
                 this.getManagerManage().getScene().setRoot(managerManageController.getManagerManage());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Error");
+                alert.setContentText("Please Select an item.");
+                alert.show();
             }
         });
     }
@@ -49,6 +55,11 @@ public class ManagerManageController {
                 personEditController.getPersonEdit().getMoney().setText(Integer.toString(manager.getMoney()));
                 personEditController.setRoll(Manager.class.getTypeName());
                 personEditController.setUsername(manager.getUsername());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Error");
+                alert.setContentText("Please Select an item.");
+                alert.show();
             }
         });
     }
