@@ -2,8 +2,8 @@ package Controller;
 
 import Model.Airplane;
 import Model.Database;
-import Model.Flight;
 import View.AirplaneManage;
+import javafx.scene.control.Alert;
 
 public class AirplaneManageController {
 
@@ -32,6 +32,11 @@ public class AirplaneManageController {
                 Database.delete(airplane);
                 AirplaneManageController airplaneManageController = new AirplaneManageController();
                 this.getAirplaneManage().getScene().setRoot(airplaneManageController.getAirplaneManage());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Error");
+                alert.setContentText("Please Select an item.");
+                alert.show();
             }
         });
     }
@@ -39,8 +44,15 @@ public class AirplaneManageController {
     public void airplaneDetail() {
         airplaneManage.getDetail().setOnAction(actionEvent -> {
             Airplane airplane = airplaneManage.getTable().getSelectionModel().getSelectedItem();
-            AirplaneDetailController airplaneDetailController = new AirplaneDetailController(airplane);
-            airplaneManage.getScene().setRoot(airplaneDetailController.getAirplaneDetail());
+            if (airplane != null) {
+                AirplaneDetailController airplaneDetailController = new AirplaneDetailController(airplane);
+                airplaneManage.getScene().setRoot(airplaneDetailController.getAirplaneDetail());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Error");
+                alert.setContentText("Please Select an item.");
+                alert.show();
+            }
         });
     }
 
@@ -53,6 +65,11 @@ public class AirplaneManageController {
                 airplaneEditController.getAirplaneEdit().getIdNo().setText(airplane.getId());
                 airplaneEditController.getAirplaneEdit().getChair().setText(Integer.toString(airplane.getChairs()));
                 airplaneEditController.setAirplaneOldId(airplane.getId());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Error");
+                alert.setContentText("Please Select an item.");
+                alert.show();
             }
         });
     }
