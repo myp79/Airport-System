@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Database;
 import Model.Manager;
+import Model.Manager;
 import View.ManagerManage;
 
 public class ManagerManageController {
@@ -13,6 +14,7 @@ public class ManagerManageController {
         managerManage.getTable().setItems(Database.managerForTable());
         addBtn();
         deleteBtn();
+        editBtn();
     }
 
     public void addBtn() {
@@ -29,6 +31,24 @@ public class ManagerManageController {
                 Database.delete(manager);
                 ManagerManageController managerManageController = new ManagerManageController();
                 this.getManagerManage().getScene().setRoot(managerManageController.getManagerManage());
+            }
+        });
+    }
+
+    public void editBtn() {
+        managerManage.getEdit().setOnAction(actionEvent -> {
+            Manager manager = managerManage.getTable().getSelectionModel().getSelectedItem();
+            if (manager != null) {
+                PersonEditController personEditController = new PersonEditController();
+                managerManage.getScene().setRoot(personEditController.getPersonEdit());
+                personEditController.getPersonEdit().getIdCard().setText(manager.getId());
+                personEditController.getPersonEdit().getAddress().setText(manager.getAddress());
+                personEditController.getPersonEdit().getEmail().setText(manager.getEmail());
+                personEditController.getPersonEdit().getName().setText(manager.getName());
+                personEditController.getPersonEdit().getLastname().setText(manager.getLastname());
+                personEditController.getPersonEdit().getMoney().setText(Integer.toString(manager.getMoney()));
+                personEditController.setRoll(Manager.class.getTypeName());
+                personEditController.setUsername(manager.getUsername());
             }
         });
     }

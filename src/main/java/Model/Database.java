@@ -83,11 +83,22 @@ public class Database {
         }
     }
 
+    public static void update(Person person) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("UPDATE person SET name='%s',lastname='%s',email='%s',idcard='%s',address='%s',money='%s' WHERE username='%s'", person.getName(), person.getLastname(), person.getEmail(), person.getId(), person.getAddress(), person.getMoney(), person.getUsername()));
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void update(Ticket ticket) {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(String.format("SELECT  * FROM flight WHERE IdNo='%d'",Integer.parseInt(ticket.getFlightId())));
+            ResultSet resultSet = statement.executeQuery(String.format("SELECT  * FROM flight WHERE IdNo='%d'", Integer.parseInt(ticket.getFlightId())));
             while (!resultSet.next()){
                 String sell = resultSet.getString("sell");
                 statement.executeUpdate(String.format("UPDATE flight SET sell='%s' WHERE IdNo='%s'", (Integer.parseInt(sell) - 1),ticket.getFlightId()));
