@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Airplane;
 import Model.Database;
+import Model.Flight;
 import View.AirplaneManage;
 
 public class AirplaneManageController {
@@ -13,6 +14,7 @@ public class AirplaneManageController {
         airplaneManage.getTable().setItems(Database.airplanesForTable());
         addBtn();
         deleteBtn();
+        airplaneDetail();
     }
 
     public void addBtn() {
@@ -25,11 +27,19 @@ public class AirplaneManageController {
     public void deleteBtn() {
         airplaneManage.getDelete().setOnAction(actionEvent -> {
             Airplane airplane = airplaneManage.getTable().getSelectionModel().getSelectedItem();
-            if (airplane != null){
+            if (airplane != null) {
                 Database.delete(airplane);
-                AirplaneManageController airplaneManageController= new AirplaneManageController();
+                AirplaneManageController airplaneManageController = new AirplaneManageController();
                 this.getAirplaneManage().getScene().setRoot(airplaneManageController.getAirplaneManage());
             }
+        });
+    }
+
+    public void airplaneDetail() {
+        airplaneManage.getDetail().setOnAction(actionEvent -> {
+            Airplane airplane = airplaneManage.getTable().getSelectionModel().getSelectedItem();
+            AirplaneDetailController airplaneDetailController = new AirplaneDetailController(airplane);
+            airplaneManage.getScene().setRoot(airplaneDetailController.getAirplaneDetail());
         });
     }
 

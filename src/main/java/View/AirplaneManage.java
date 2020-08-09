@@ -14,12 +14,14 @@ public class AirplaneManage extends BorderPane {
     private JFXButton add;
     private JFXButton edit;
     private JFXButton delete;
+    private JFXButton detail;
     private TableView<Airplane> table;
 
     public AirplaneManage(){
         add = new JFXButton();
         edit = new JFXButton();
         delete = new JFXButton();
+        detail = new JFXButton();
         table = new TableView<>();
         TableColumn<Airplane, String> idCardCol = new TableColumn<>("ID");
         TableColumn<Airplane, String> chairsCol = new TableColumn<>("Capacity");
@@ -31,10 +33,11 @@ public class AirplaneManage extends BorderPane {
         add.setText("Add Airplane");
         edit.setText("Edit Airplane");
         delete.setText("Delete Airplane");
+        detail.setText("Detail");
 
         // Add all to the btnGroup
         VBox btnGroup = new VBox();
-        btnGroup.getChildren().addAll(table,add, edit, delete);
+        btnGroup.getChildren().addAll(table, add, edit, delete, detail);
         btnGroup.setAlignment(Pos.CENTER);
 
         // Setting of Airplane View
@@ -55,5 +58,9 @@ public class AirplaneManage extends BorderPane {
 
     public TableView<Airplane> getTable() {
         return table;
+    }
+
+    public JFXButton getDetail() {
+        return detail;
     }
 }

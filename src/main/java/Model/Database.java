@@ -300,6 +300,26 @@ public class Database {
         }
     }
 
+    public static void airplanes(String airplaneId) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM flight WHERE airplane='%s'", airplaneId));
+            while (resultSet.next()) {
+                String id = resultSet.getString("idNo");
+                String source = resultSet.getString("source");
+                String destination = resultSet.getString("destination");
+                Flight flight = new Flight();
+                flight.setId(id);
+                flight.setSource(source);
+                flight.setDestination(destination);
+                flights.add(flight);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void flights() {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
@@ -444,6 +464,14 @@ public class Database {
     public static ObservableList<Flight> flightsForTable() {
         Database.flights.clear();
         flights();
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
+        flights.addAll(Database.flights);
+        return flights;
+    }
+
+    public static ObservableList<Flight> flightsForTable(String airplaneId) {
+        Database.flights.clear();
+        airplanes(airplaneId);
         ObservableList<Flight> flights = FXCollections.observableArrayList();
         flights.addAll(Database.flights);
         return flights;
