@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Database;
 import View.MassageView;
+import javafx.scene.control.Alert;
 
 public class MassageController {
     private MassageView massageView;
@@ -19,7 +20,14 @@ public class MassageController {
     public void submitBtn() {
         massageView.getSubmit().setOnAction(actionEvent -> {
             String massage = massageView.getMassage().getText();
-            Database.add(username, massage);
+            if (!massage.equals("")) {
+                Database.add(username, massage);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Massage Error");
+                alert.setContentText("Please enter a massage.");
+                alert.show();
+            }
         });
     }
 
