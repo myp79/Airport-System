@@ -1,7 +1,6 @@
 package View;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;

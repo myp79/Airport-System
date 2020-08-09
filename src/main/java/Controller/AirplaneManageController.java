@@ -15,6 +15,7 @@ public class AirplaneManageController {
         addBtn();
         deleteBtn();
         airplaneDetail();
+        editBtn();
     }
 
     public void addBtn() {
@@ -40,6 +41,19 @@ public class AirplaneManageController {
             Airplane airplane = airplaneManage.getTable().getSelectionModel().getSelectedItem();
             AirplaneDetailController airplaneDetailController = new AirplaneDetailController(airplane);
             airplaneManage.getScene().setRoot(airplaneDetailController.getAirplaneDetail());
+        });
+    }
+
+    public void editBtn() {
+        airplaneManage.getEdit().setOnAction(actionEvent -> {
+            Airplane airplane = airplaneManage.getTable().getSelectionModel().getSelectedItem();
+            if (airplane != null) {
+                AirplaneEditController airplaneEditController = new AirplaneEditController();
+                airplaneManage.getScene().setRoot(airplaneEditController.getAirplaneEdit());
+                airplaneEditController.getAirplaneEdit().getIdNo().setText(airplane.getId());
+                airplaneEditController.getAirplaneEdit().getChair().setText(Integer.toString(airplane.getChairs()));
+                airplaneEditController.setAirplaneOldId(airplane.getId());
+            }
         });
     }
 

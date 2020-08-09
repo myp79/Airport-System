@@ -99,10 +99,22 @@ public class Database {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(String.format("SELECT  * FROM flight WHERE IdNo='%d'", Integer.parseInt(ticket.getFlightId())));
-            while (!resultSet.next()){
+            while (!resultSet.next()) {
                 String sell = resultSet.getString("sell");
-                statement.executeUpdate(String.format("UPDATE flight SET sell='%s' WHERE IdNo='%s'", (Integer.parseInt(sell) - 1),ticket.getFlightId()));
+                statement.executeUpdate(String.format("UPDATE flight SET sell='%s' WHERE IdNo='%s'", (Integer.parseInt(sell) - 1), ticket.getFlightId()));
             }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void update(Airplane airplane, String airplaneOldId) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("UPDATE airplane SET idNo='%s',chair='%s' WHERE idNo='%s'", airplane.getId(), airplane.getChairs(), airplaneOldId));
+            connection.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
