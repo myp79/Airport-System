@@ -250,6 +250,38 @@ public class Database {
         }
     }
 
+    public static void passengers(String username) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM person WHERE roll='passenger' and username='%s'", username));
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                String lastname = resultSet.getString("lastname");
+                Passenger passenger = new Passenger();
+                passenger.setName(name);
+                passenger.setLastname(lastname);
+                passengers.add(passenger);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void flights(String flightId) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM ticket WHERE flightId='%s'", flightId));
+            while (resultSet.next()) {
+                String username = resultSet.getString("person");
+                passengers(username);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void airplanes() {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
@@ -423,5 +455,13 @@ public class Database {
         ObservableList<Ticket> tickets = FXCollections.observableArrayList();
         tickets.addAll(Database.tickets);
         return tickets;
+    }
+
+    public static ObservableList<Passenger> passengerForTable(String flightId) {
+        Database.passengers.clear();
+        flights(flightId);
+        ObservableList<Passenger> passengers = FXCollections.observableArrayList();
+        passengers.addAll(Database.passengers);
+        return passengers;
     }
 }

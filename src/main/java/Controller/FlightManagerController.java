@@ -12,6 +12,7 @@ public class FlightManagerController {
         flightManager.getTable().setItems(Database.flightsForTable());
         addBtn();
         deleteBtn();
+        flightDetail();
     }
 
     public void addBtn() {
@@ -24,11 +25,19 @@ public class FlightManagerController {
     public void deleteBtn() {
         flightManager.getDelete().setOnAction(actionEvent -> {
             Flight flight = flightManager.getTable().getSelectionModel().getSelectedItem();
-            if (flight!=null) {
+            if (flight != null) {
                 Database.delete(flight);
                 FlightManagerController flightManagerController = new FlightManagerController();
                 this.flightManager.getScene().setRoot(flightManagerController.getFlightManager());
             }
+        });
+    }
+
+    public void flightDetail() {
+        flightManager.getDetail().setOnAction(actionEvent -> {
+            Flight flight = flightManager.getTable().getSelectionModel().getSelectedItem();
+            FlightDetailController flightDetailController = new FlightDetailController(flight);
+            flightManager.getScene().setRoot(flightDetailController.getFlightDetail());
         });
     }
 

@@ -14,12 +14,14 @@ public class FlightManager extends BorderPane {
     private JFXButton add;
     private JFXButton edit;
     private JFXButton delete;
+    private JFXButton detail;
     private TableView<Flight> table;
 
     public FlightManager() {
         add = new JFXButton();
         edit = new JFXButton();
         delete = new JFXButton();
+        detail = new JFXButton();
         table = new TableView<>();
         TableColumn<Flight, String> durationCol = new TableColumn<>("Duration");
         TableColumn<Flight, String> ticketNo = new TableColumn<>("No");
@@ -45,10 +47,11 @@ public class FlightManager extends BorderPane {
         add.setText("Add Flight");
         edit.setText("Edit Flight");
         delete.setText("Delete Flight");
+        detail.setText("Detail");
 
         // Add all to the btnGroup
         VBox btnGroup = new VBox();
-        btnGroup.getChildren().addAll(table, add, edit, delete);
+        btnGroup.getChildren().addAll(table, add, edit, delete, detail);
         btnGroup.setAlignment(Pos.CENTER);
 
         // Setting of Manager View
@@ -69,5 +72,9 @@ public class FlightManager extends BorderPane {
 
     public TableView<Flight> getTable() {
         return table;
+    }
+
+    public JFXButton getDetail() {
+        return detail;
     }
 }
