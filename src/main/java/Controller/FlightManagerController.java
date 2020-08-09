@@ -1,9 +1,9 @@
 package Controller;
 
-import Model.Airplane;
 import Model.Database;
 import Model.Flight;
 import View.FlightManager;
+import javafx.scene.control.Alert;
 
 public class FlightManagerController {
     private FlightManager flightManager;
@@ -31,6 +31,11 @@ public class FlightManagerController {
                 Database.delete(flight);
                 FlightManagerController flightManagerController = new FlightManagerController();
                 this.flightManager.getScene().setRoot(flightManagerController.getFlightManager());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Error");
+                alert.setContentText("Please Select an item.");
+                alert.show();
             }
         });
     }
@@ -38,8 +43,15 @@ public class FlightManagerController {
     public void flightDetail() {
         flightManager.getDetail().setOnAction(actionEvent -> {
             Flight flight = flightManager.getTable().getSelectionModel().getSelectedItem();
-            FlightDetailController flightDetailController = new FlightDetailController(flight);
-            flightManager.getScene().setRoot(flightDetailController.getFlightDetail());
+            if (flight != null) {
+                FlightDetailController flightDetailController = new FlightDetailController(flight);
+                flightManager.getScene().setRoot(flightDetailController.getFlightDetail());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Error");
+                alert.setContentText("Please Select an item.");
+                alert.show();
+            }
         });
     }
 
@@ -59,6 +71,11 @@ public class FlightManagerController {
                 flightEditController.getFlightEdit().getTime().setText(flight.getTime());
                 flightEditController.getFlightEdit().getDuration().setText(flight.getDuration());
                 flightEditController.setFlightOldId(flight.getId());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Select Error");
+                alert.setContentText("Please Select an item.");
+                alert.show();
             }
         });
     }
