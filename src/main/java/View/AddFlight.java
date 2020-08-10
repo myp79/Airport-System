@@ -1,6 +1,5 @@
 package View;
 
-import Model.Airplane;
 import com.jfoenix.controls.*;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;

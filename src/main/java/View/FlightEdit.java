@@ -1,7 +1,6 @@
 package View;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -10,24 +9,24 @@ import javafx.scene.layout.VBox;
 public class FlightEdit extends BorderPane {
 
     private JFXTextField idNum;
-    private JFXTextField airplane;
+    private JFXComboBox<String> airplane;
     private JFXTextField tickets;
     private JFXTextField source;
     private JFXTextField destination;
-    private JFXTextField date;
-    private JFXTextField time;
+    private JFXDatePicker date;
+    private JFXTimePicker time;
     private JFXTextField no;
     private JFXTextField duration;
     private JFXButton submit;
 
     public FlightEdit() {
         idNum = new JFXTextField();
-        airplane = new JFXTextField();
+        airplane = new JFXComboBox<>();
         tickets = new JFXTextField();
         source = new JFXTextField();
         destination = new JFXTextField();
-        date = new JFXTextField();
-        time = new JFXTextField();
+        date = new JFXDatePicker();
+        time = new JFXTimePicker();
         duration = new JFXTextField();
         no = new JFXTextField();
         submit = new JFXButton();
@@ -65,7 +64,7 @@ public class FlightEdit extends BorderPane {
         return idNum;
     }
 
-    public JFXTextField getAirplane() {
+    public JFXComboBox<String> getAirplane() {
         return airplane;
     }
 
@@ -81,11 +80,11 @@ public class FlightEdit extends BorderPane {
         return destination;
     }
 
-    public JFXTextField getDate() {
+    public JFXDatePicker getDate() {
         return date;
     }
 
-    public JFXTextField getTime() {
+    public JFXTimePicker getTime() {
         return time;
     }
 
