@@ -37,7 +37,7 @@ public class FlightEditController {
                             if (flight.getDestination().matches("\\D+")) {
                                 if (!flight.getDuration().matches("\\d+\\D+")) {
                                     if (!flight.getNo().matches("\\d+\\D+")) {
-                                        if (Database.check(flight)) {
+                                        if (Database.check(flight) || flight.getId().equals(flightOldId)) {
                                             Database.update(flight, flightOldId);
                                             FlightManagerController flightManagerController = new FlightManagerController();
                                             flightEdit.getScene().setRoot(flightManagerController.getFlightManager());

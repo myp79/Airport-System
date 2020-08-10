@@ -22,7 +22,7 @@ public class AirplaneEditController {
             airplane.setChairs(Integer.parseInt(airplaneEdit.getChair().getText()));
             if (!airplane.getId().equals("") && !Integer.toString(airplane.getChairs()).equals("")) {
                 if (!Integer.toString(airplane.getChairs()).matches("\\d+\\D+")) {
-                    if (Database.check(airplane)) {
+                    if (Database.check(airplane) || airplane.getId().equals(airplaneOldId)) {
                         Database.update(airplane, airplaneOldId);
                         AirplaneManageController airplaneManageController = new AirplaneManageController();
                         airplaneEdit.getScene().setRoot(airplaneManageController.getAirplaneManage());
