@@ -38,11 +38,28 @@ public class Database {
         return null;
     }
 
-    public static void add(String name, String lastname, String email, String address, String idcard, int money, String username, String password, String roll) {
+    public static boolean check(String username) {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            statement.executeUpdate(String.format("INSERT INTO person (name, lastname, email, idcard, address, money, username, password, roll) VALUES('%s','%s','%s','%s','%s',%d,'%s','%s','%s')", name, lastname, email, idcard, address, money, username, password, roll));
+            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM person WHERE username = '%s'", username));
+            while (resultSet.next()) {
+                if (resultSet.getString("username").equals(username)) {
+                    return false;
+                }
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static void add(Person person, String roll) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            statement.executeUpdate(String.format("INSERT INTO person (name, lastname, email, idcard, address, money, username, password, roll) VALUES('%s','%s','%s','%s','%s',%d,'%s','%s','%s')", person.getName(), person.getLastname(), person.getEmail(), person.getId(), person.getAddress(), person.getMoney(), person.getUsername(), person.getPassword(), roll));
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
