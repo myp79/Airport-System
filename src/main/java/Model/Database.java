@@ -55,6 +55,40 @@ public class Database {
         return true;
     }
 
+    public static boolean check(Airplane airplane) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM airplane WHERE idNo = '%s'", airplane.getId()));
+            while (resultSet.next()) {
+                if (resultSet.getString("idNo").equals(airplane.getId())) {
+                    return false;
+                }
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static boolean check(Flight flight) {
+        try {
+            connection = DriverManager.getConnection(url, adminUser, adminPassword);
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM flight WHERE idNo = '%s'", flight.getId()));
+            while (resultSet.next()) {
+                if (resultSet.getString("IdNo").equals(flight.getId())) {
+                    return false;
+                }
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
     public static void add(Person person, String roll) {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);

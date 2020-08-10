@@ -23,9 +23,16 @@ public class AddAirplaneController {
                     Airplane airplane = new Airplane();
                     airplane.setId(id);
                     airplane.setChairs(Integer.parseInt(chairs));
-                    Database.add(airplane);
-                    AirplaneManageController airplaneManageController = new AirplaneManageController();
-                    addAirplane.getScene().setRoot(airplaneManageController.getAirplaneManage());
+                    if (Database.check(airplane)) {
+                        Database.add(airplane);
+                        AirplaneManageController airplaneManageController = new AirplaneManageController();
+                        addAirplane.getScene().setRoot(airplaneManageController.getAirplaneManage());
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Exist Error");
+                        alert.setContentText("Airplane exist.");
+                        alert.show();
+                    }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Chairs Error");

@@ -50,9 +50,16 @@ public class AddFlightController {
                                     flight.setTime(time.toString());
                                     flight.setTicket(ticket);
                                     flight.setDuration(duration);
-                                    Database.add(flight);
-                                    FlightManagerController flightManagerController = new FlightManagerController();
-                                    addFlight.getScene().setRoot(flightManagerController.getFlightManager());
+                                    if (Database.check(flight)) {
+                                        Database.add(flight);
+                                        FlightManagerController flightManagerController = new FlightManagerController();
+                                        addFlight.getScene().setRoot(flightManagerController.getFlightManager());
+                                    } else {
+                                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                                        alert.setTitle("Flight Error");
+                                        alert.setContentText("Flight is exist.");
+                                        alert.show();
+                                    }
                                 } else {
                                     Alert alert = new Alert(Alert.AlertType.ERROR);
                                     alert.setTitle("Duration Error");
