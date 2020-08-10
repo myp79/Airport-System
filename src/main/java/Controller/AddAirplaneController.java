@@ -3,7 +3,6 @@ package Controller;
 import Model.Airplane;
 import Model.Database;
 import View.AddAirplane;
-import javafx.scene.Scene;
 
 public class AddAirplaneController {
 
