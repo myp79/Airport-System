@@ -22,9 +22,16 @@ public class AirplaneEditController {
             airplane.setChairs(Integer.parseInt(airplaneEdit.getChair().getText()));
             if (!airplane.getId().equals("") && !Integer.toString(airplane.getChairs()).equals("")) {
                 if (!Integer.toString(airplane.getChairs()).matches("\\d+\\D+")) {
-                    Database.update(airplane, airplaneOldId);
-                    AirplaneManageController airplaneManageController = new AirplaneManageController();
-                    airplaneEdit.getScene().setRoot(airplaneManageController.getAirplaneManage());
+                    if (Database.check(airplane)) {
+                        Database.update(airplane, airplaneOldId);
+                        AirplaneManageController airplaneManageController = new AirplaneManageController();
+                        airplaneEdit.getScene().setRoot(airplaneManageController.getAirplaneManage());
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Airplane Error");
+                        alert.setContentText("Airplane exist.");
+                        alert.show();
+                    }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Chairs Error");

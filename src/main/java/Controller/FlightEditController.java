@@ -37,9 +37,16 @@ public class FlightEditController {
                             if (flight.getDestination().matches("\\D+")) {
                                 if (!flight.getDuration().matches("\\d+\\D+")) {
                                     if (!flight.getNo().matches("\\d+\\D+")) {
-                                        Database.update(flight, flightOldId);
-                                        FlightManagerController flightManagerController = new FlightManagerController();
-                                        flightEdit.getScene().setRoot(flightManagerController.getFlightManager());
+                                        if (Database.check(flight)) {
+                                            Database.update(flight, flightOldId);
+                                            FlightManagerController flightManagerController = new FlightManagerController();
+                                            flightEdit.getScene().setRoot(flightManagerController.getFlightManager());
+                                        } else {
+                                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                                            alert.setTitle("Flight Error");
+                                            alert.setContentText("Flight exist.");
+                                            alert.show();
+                                        }
                                     } else {
                                         Alert alert = new Alert(Alert.AlertType.ERROR);
                                         alert.setTitle("No Error");
