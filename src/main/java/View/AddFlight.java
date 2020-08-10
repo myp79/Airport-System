@@ -1,9 +1,7 @@
 package View;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTimePicker;
+import Model.Airplane;
+import com.jfoenix.controls.*;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -12,7 +10,7 @@ import javafx.scene.layout.VBox;
 public class AddFlight extends BorderPane {
 
     private JFXTextField idNum;
-    private JFXTextField airplane;
+    private JFXComboBox<String> airplane;
     private JFXTextField tickets;
     private JFXTextField source;
     private JFXTextField destination;
@@ -23,7 +21,7 @@ public class AddFlight extends BorderPane {
 
     public AddFlight() {
         idNum = new JFXTextField();
-        airplane = new JFXTextField();
+        airplane = new JFXComboBox<>();
         tickets = new JFXTextField();
         source = new JFXTextField();
         destination = new JFXTextField();
@@ -65,7 +63,7 @@ public class AddFlight extends BorderPane {
         return idNum;
     }
 
-    public JFXTextField getAirplane() {
+    public JFXComboBox<String> getAirplane() {
         return airplane;
     }
 

@@ -10,6 +10,9 @@ public class AddFlightController {
 
     public AddFlightController() {
         addFlight = new AddFlight();
+        for (int i = 0; i < Database.airplanesForTable().size(); i++) {
+            addFlight.getAirplane().getItems().add(Database.airplanesForTable().get(i).getId());
+        }
         submit();
     }
 
@@ -20,7 +23,7 @@ public class AddFlightController {
     public void submit() {
         addFlight.getSubmit().setOnAction(actionEvent -> {
             String id = addFlight.getIdNum().getText();
-            String airplane = addFlight.getAirplane().getText();
+            String airplane = addFlight.getAirplane().getValue();
             String ticket = addFlight.getTickets().getText();
             String source = addFlight.getSource().getText();
             String destination = addFlight.getDestination().getText();
@@ -30,11 +33,11 @@ public class AddFlightController {
             String sell = "0";
             Flight flight = new Flight();
             if (!id.equals("") && !airplane.equals("") && !ticket.equals("") && !source.equals("") && !destination.equals("") && !date.equals("") && !time.equals("") && !duration.equals("")) {
-                if (id.matches("\\d+\\D+")) {
-                    if (ticket.matches("\\d+\\D+")) {
+                if (!id.matches("\\d+\\D+")) {
+                    if (!ticket.matches("\\d+\\D+")) {
                         if (source.matches("\\D+")) {
                             if (destination.matches("\\D+")) {
-                                if (duration.matches("\\d+\\D+")) {
+                                if (!duration.matches("\\d+\\D+")) {
                                     flight.setId(id);
                                     flight.setAirplane(airplane);
                                     flight.setDate(date);
