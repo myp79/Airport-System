@@ -5,6 +5,9 @@ import Model.Flight;
 import View.AddFlight;
 import javafx.scene.control.Alert;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class AddFlightController {
     private AddFlight addFlight;
 
@@ -27,12 +30,12 @@ public class AddFlightController {
             String ticket = addFlight.getTickets().getText();
             String source = addFlight.getSource().getText();
             String destination = addFlight.getDestination().getText();
-            String date = addFlight.getDate().getValue().toString();
-            String time = addFlight.getTime().getValue().toString();
+            LocalDate date = addFlight.getDate().getValue();
+            LocalTime time = addFlight.getTime().getValue();
             String duration = addFlight.getDuration().getText();
             String sell = "0";
             Flight flight = new Flight();
-            if (!id.equals("") && !airplane.equals("") && !ticket.equals("") && !source.equals("") && !destination.equals("") && !date.equals("") && !time.equals("") && !duration.equals("")) {
+            if (!id.equals("") && !airplane.equals("") && !ticket.equals("") && !source.equals("") && !destination.equals("") && !date.toString().equals("") && !time.toString().equals("") && !duration.equals("")) {
                 if (!id.matches("\\d+\\D+")) {
                     if (!ticket.matches("\\d+\\D+")) {
                         if (source.matches("\\D+")) {
@@ -40,11 +43,11 @@ public class AddFlightController {
                                 if (!duration.matches("\\d+\\D+")) {
                                     flight.setId(id);
                                     flight.setAirplane(airplane);
-                                    flight.setDate(date);
+                                    flight.setDate(date.toString());
                                     flight.setDestination(destination);
                                     flight.setSource(source);
                                     flight.setNo(sell);
-                                    flight.setTime(time);
+                                    flight.setTime(time.toString());
                                     flight.setTicket(ticket);
                                     flight.setDuration(duration);
                                     Database.add(flight);
