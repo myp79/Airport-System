@@ -2,6 +2,7 @@ package View;
 
 import Model.Airplane;
 import Model.Flight;
+import Model.FlightStatus;
 import com.jfoenix.controls.JFXButton;
 import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
@@ -32,7 +33,7 @@ public class FlightManager extends BorderPane {
         TableColumn<Flight, String> timeCol = new TableColumn<>("Time");
         TableColumn<Flight, String> ticketCol = new TableColumn<>("Ticket");
         TableColumn<Flight, Airplane> airplaneCol = new TableColumn<>("Airplane");
-        TableColumn<Flight, Flight.FlightStatus> status = new TableColumn<>("Status");
+        TableColumn<Flight, FlightStatus> status = new TableColumn<>("Status");
         durationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
         ticketNo.setCellValueFactory(new PropertyValueFactory<>("no"));
         idCardCol.setCellValueFactory(new PropertyValueFactory<>("id"));

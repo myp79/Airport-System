@@ -22,8 +22,6 @@ public class Flight implements Showable {
     private String duration;
     private FlightStatus status;
 
-    public enum FlightStatus {done, undone, flying}
-
     public String getId() {
         return id;
     }

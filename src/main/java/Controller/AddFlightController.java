@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Database;
 import Model.Flight;
+import Model.FlightStatus;
 import View.AddFlight;
 import javafx.scene.control.Alert;
 
@@ -53,19 +54,19 @@ public class AddFlightController {
                                     if (Database.check(flight)) {
                                         LocalDate localDate = LocalDate.now();
                                         LocalTime localTime = LocalTime.now();
-                                        Flight.FlightStatus status;
+                                        FlightStatus status;
                                         if (localDate.isAfter(flight.getDate())) {
-                                            status = Flight.FlightStatus.done;
+                                            status = FlightStatus.done;
                                         } else if (localDate.isEqual(flight.getDate())) {
                                             if (localTime.isAfter(flight.getTime())) {
-                                                status = Flight.FlightStatus.done;
+                                                status = FlightStatus.done;
                                             } else if (localTime.isBefore(flight.getTime())) {
-                                                status = Flight.FlightStatus.undone;
+                                                status = FlightStatus.undone;
                                             } else {
-                                                status = Flight.FlightStatus.flying;
+                                                status = FlightStatus.flying;
                                             }
                                         } else {
-                                            status = Flight.FlightStatus.undone;
+                                            status = FlightStatus.undone;
                                         }
                                         flight.setStatus(status);
                                         Database.add(flight);

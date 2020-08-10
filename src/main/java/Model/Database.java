@@ -422,7 +422,7 @@ public class Database {
                 LocalTime time = LocalTime.parse(resultSet.getString("time"));
                 String sell = resultSet.getString("sell");
                 String duration = resultSet.getString("duration");
-                Flight.FlightStatus status = Flight.FlightStatus.valueOf(resultSet.getString("status"));
+                FlightStatus status = FlightStatus.valueOf(resultSet.getString("status"));
                 Flight flight = new Flight();
                 flight.setId(id);
                 flight.setAirplane(airplane);
