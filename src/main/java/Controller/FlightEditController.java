@@ -25,12 +25,12 @@ public class FlightEditController {
             flight.setDestination(flightEdit.getDestination().getText());
             flight.setSource(flightEdit.getSource().getText());
             flight.setDuration(flightEdit.getDuration().getText());
-            flight.setTime(flightEdit.getTime().getValue().toString());
-            flight.setDate(flightEdit.getDate().getValue().toString());
+            flight.setTime(flightEdit.getTime().getValue());
+            flight.setDate(flightEdit.getDate().getValue());
             flight.setTicket(flightEdit.getTickets().getText());
             flight.setNo(flightEdit.getNo().getText());
             flight.setAirplane(flightEdit.getAirplane().getValue());
-            if (!flight.getId().equals("") && !flight.getDestination().equals("") && !flight.getSource().equals("") && !flight.getDuration().equals("") && !flight.getTime().equals("") && !flight.getDate().equals("") && !flight.getTicket().equals("") && !flight.getNo().equals("") && !flight.getAirplane().equals("")) {
+            if (!flight.getId().equals("") && !flight.getDestination().equals("") && !flight.getSource().equals("") && !flight.getDuration().equals("") && !flight.getTime().toString().equals("") && !flight.getDate().toString().equals("") && !flight.getTicket().equals("") && !flight.getNo().equals("") && !flight.getAirplane().equals("")) {
                 if (!flight.getId().matches("\\d+\\D+")) {
                     if (!flight.getTicket().matches("\\d+\\D+")) {
                         if (flight.getSource().matches("\\D+")) {

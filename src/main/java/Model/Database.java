@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -209,7 +211,7 @@ public class Database {
         try {
             connection = DriverManager.getConnection(url, adminUser, adminPassword);
             statement = connection.createStatement();
-            statement.executeUpdate(String.format("INSERT INTO flight (IdNo, airplane, ticket, source, destination, date, time, sell, duration) VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s') ", flight.getId(), flight.getAirplane(), flight.getTicket(), flight.getSource(), flight.getDestination(), flight.getDate(), flight.getTime(), flight.getNo(), flight.getDuration()));
+            statement.executeUpdate(String.format("INSERT INTO flight (IdNo, airplane, ticket, source, destination, date, time, sell, duration,status) VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s') ", flight.getId(), flight.getAirplane(), flight.getTicket(), flight.getSource(), flight.getDestination(), flight.getDate(), flight.getTime(), flight.getNo(), flight.getDuration(), flight.getStatus()));
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -416,10 +418,11 @@ public class Database {
                 String ticket = resultSet.getString("ticket");
                 String source = resultSet.getString("source");
                 String destination = resultSet.getString("destination");
-                String date = resultSet.getString("date");
-                String time = resultSet.getString("time");
+                LocalDate date = LocalDate.parse(resultSet.getString("date"));
+                LocalTime time = LocalTime.parse(resultSet.getString("time"));
                 String sell = resultSet.getString("sell");
                 String duration = resultSet.getString("duration");
+                Flight.FlightStatus status = Flight.FlightStatus.valueOf(resultSet.getString("status"));
                 Flight flight = new Flight();
                 flight.setId(id);
                 flight.setAirplane(airplane);
@@ -430,6 +433,7 @@ public class Database {
                 flight.setTime(time);
                 flight.setTicket(ticket);
                 flight.setDuration(duration);
+                flight.setStatus(status);
                 flights.add(flight);
             }
         } catch (SQLException e) {

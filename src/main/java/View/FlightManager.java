@@ -32,6 +32,7 @@ public class FlightManager extends BorderPane {
         TableColumn<Flight, String> timeCol = new TableColumn<>("Time");
         TableColumn<Flight, String> ticketCol = new TableColumn<>("Ticket");
         TableColumn<Flight, Airplane> airplaneCol = new TableColumn<>("Airplane");
+        TableColumn<Flight, Flight.FlightStatus> status = new TableColumn<>("Status");
         durationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
         ticketNo.setCellValueFactory(new PropertyValueFactory<>("no"));
         idCardCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -41,7 +42,8 @@ public class FlightManager extends BorderPane {
         timeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
         airplaneCol.setCellValueFactory(new PropertyValueFactory<>("airplane"));
         ticketCol.setCellValueFactory(new PropertyValueFactory<>("ticket"));
-        table.getColumns().addAll(idCardCol, airplaneCol, ticketCol, ticketNo, sourceCol, destinationColl, dateCol, timeCol, durationCol);
+        status.setCellValueFactory(new PropertyValueFactory<>("status"));
+        table.getColumns().addAll(idCardCol, airplaneCol, ticketCol, ticketNo, sourceCol, destinationColl, dateCol, timeCol, durationCol, status);
 
         // Text
         add.setText("Add Flight");

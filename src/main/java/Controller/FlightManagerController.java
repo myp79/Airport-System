@@ -5,9 +5,6 @@ import Model.Flight;
 import View.FlightManager;
 import javafx.scene.control.Alert;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 public class FlightManagerController {
     private FlightManager flightManager;
 
@@ -70,8 +67,8 @@ public class FlightManagerController {
                 flightEditController.getFlightEdit().getTickets().setText(flight.getTicket());
                 flightEditController.getFlightEdit().getSource().setText(flight.getSource());
                 flightEditController.getFlightEdit().getDestination().setText(flight.getDestination());
-                flightEditController.getFlightEdit().getDate().setValue(LocalDate.parse(flight.getDate()));
-                flightEditController.getFlightEdit().getTime().setValue(LocalTime.parse(flight.getTime()));
+                flightEditController.getFlightEdit().getDate().setValue(flight.getDate());
+                flightEditController.getFlightEdit().getTime().setValue(flight.getTime());
                 flightEditController.getFlightEdit().getDuration().setText(flight.getDuration());
                 flightEditController.setFlightOldId(flight.getId());
             } else {

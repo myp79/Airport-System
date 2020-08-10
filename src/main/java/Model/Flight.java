@@ -1,5 +1,7 @@
 package Model;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Flight implements Showable {
@@ -13,11 +15,14 @@ public class Flight implements Showable {
     private String ticket;
     private String source;
     private String destination;
-    private String date;
-    private String time;
+    private LocalDate date;
+    private LocalTime time;
     private String no;
     private ArrayList<Passenger> passengers;
     private String duration;
+    private FlightStatus status;
+
+    public enum FlightStatus {done, undone, flying}
 
     public String getId() {
         return id;
@@ -59,19 +64,19 @@ public class Flight implements Showable {
         this.destination = destination;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public String getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
@@ -97,5 +102,13 @@ public class Flight implements Showable {
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    public void setStatus(FlightStatus status) {
+        this.status = status;
+    }
+
+    public FlightStatus getStatus() {
+        return status;
     }
 }
