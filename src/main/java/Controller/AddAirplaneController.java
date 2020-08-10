@@ -3,6 +3,7 @@ package Controller;
 import Model.Airplane;
 import Model.Database;
 import View.AddAirplane;
+import javafx.scene.control.Alert;
 
 public class AddAirplaneController {
 
@@ -17,12 +18,27 @@ public class AddAirplaneController {
         addAirplane.getSubmit().setOnAction(actionEvent -> {
             String id = addAirplane.getIdNo().getText();
             String chairs = addAirplane.getChairs().getText();
-            Airplane airplane = new Airplane();
-            airplane.setId(id);
-            airplane.setChairs(Integer.parseInt(chairs));
-            Database.add(airplane);
-            AirplaneManageController airplaneManageController= new AirplaneManageController();
-            addAirplane.getScene().setRoot(airplaneManageController.getAirplaneManage());
+            if (!id.equals("") && !chairs.equals("")) {
+                if (!chairs.matches("\\d+\\D+")) {
+                    Airplane airplane = new Airplane();
+                    airplane.setId(id);
+                    airplane.setChairs(Integer.parseInt(chairs));
+                    Database.add(airplane);
+                    AirplaneManageController airplaneManageController = new AirplaneManageController();
+                    addAirplane.getScene().setRoot(airplaneManageController.getAirplaneManage());
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Chairs Error");
+                    alert.setContentText("Chairs have number and word. Check it.");
+                    alert.show();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Null Error");
+                alert.setContentText("All field required.");
+                alert.show();
+            }
+
         });
     }
 
